@@ -94,7 +94,7 @@
     h.innerHTML =
       '<a class="skip" href="#main">Skip to content</a>' + live +
       '<header class="site-header"><div class="wrap">' +
-      '<a class="brand" href="/"><img src="/images/logo.svg" alt=""><span>' + esc(C.name) + "<small>" + esc(C.town) + "</small></span></a>" +
+      '<a class="brand" href="/"><img src="/images/logo-mark-on-dark.svg" alt=""><span>' + esc(C.name) + "<small>" + esc(C.town) + "</small></span></a>" +
       '<button class="nav-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>' +
       '<nav class="nav" id="site-nav" aria-label="Main"><ul>' + links + "</ul></nav></div></header>";
     var first = document.body.firstChild;
