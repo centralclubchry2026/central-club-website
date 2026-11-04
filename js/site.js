@@ -112,7 +112,7 @@
     var f = document.createElement("footer");
     f.className = "site-footer";
     f.innerHTML = '<div class="wrap"><div class="footer-grid">' +
-      "<div><h2>" + esc(C.name) + " " + esc(C.town) + "</h2><p>" + esc(C.address) + "</p>" +
+      '<div><img class="footer-logo" src="/images/logo-full-on-dark.svg" alt="' + esc(C.name) + " " + esc(C.town) + '"><p>' + esc(C.address) + "</p>" +
       '<p><a href="' + safeUrl(C.mapsUrl) + '" target="_blank" rel="noopener noreferrer">Get directions on Google Maps</a></p></div>' +
       "<div><h2>Contact</h2><ul>" +
       '<li><a href="mailto:' + esc(C.email) + '">' + esc(C.email) + "</a></li>" +
