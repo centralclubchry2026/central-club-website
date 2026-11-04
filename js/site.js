@@ -177,14 +177,36 @@
     },
 
     about: function () {
+      var ob = C.officeBearers || [], arc = C.archive || [];
       main().innerHTML = pageHead("About the club", "Est. " + C.founded + " in " + C.town) +
         '<section class="section"><div class="wrap split"><div><h2>Our story</h2>' +
         (C.history || []).map(function (p) { return "<p>" + esc(p) + "</p>"; }).join("") + "</div>" +
         '<div><h2>Milestones</h2><ol class="timeline">' +
         (C.milestones || []).map(function (m) { return "<li><b>" + esc(m.year) + "</b>" + esc(m.text) + "</li>"; }).join("") +
         "</ol></div></div></section>" +
-        '<section class="section" id="founders"><div class="wrap"><h2>The founding team</h2><p class="section-lead">The people who started Central Club.</p><div class="people">' +
-        (C.founders || []).map(function (p) { return person(p, p.role, p.note); }).join("") + "</div></div></section>" +
+
+        '<section class="section" id="founders"><div class="wrap"><h2>The founding team</h2><p class="section-lead">The ' +
+        (C.founders || []).length + " founder members of Central Club. Photographs from the year 2000.</p><div class=\"people founders\">" +
+        (C.founders || []).map(function (p) { return person(p, p.note, p.role); }).join("") + "</div></div></section>" +
+
+        (ob.length ? '<section class="section" id="office-bearers"><div class="wrap"><h2>Office bearers through the years</h2>' +
+          '<div class="table-wrap"><table class="bearers"><thead><tr><th>Year</th><th>President</th><th>Secretary</th></tr></thead><tbody>' +
+          ob.slice().reverse().map(function (r) { return "<tr><td>" + esc(r.year) + "</td><td>" + esc(r.president) + "</td><td>" + esc(r.secretary) + "</td></tr>"; }).join("") +
+          "</tbody></table></div></div></section>" : "") +
+
+        arc.map(function (a) {
+          return '<section class="section" id="archive"><div class="wrap"><h2>From the archives</h2>' +
+            '<div class="archive"><div class="archive-pages">' +
+            (a.images || []).map(function (im, i) {
+              return '<a href="' + safeUrl(im) + '" target="_blank" rel="noopener"><img src="' + safeUrl(im) + '" alt="' + esc(a.title) + ", page " + (i + 1) + '" loading="lazy"></a>';
+            }).join("") + "</div>" +
+            '<div class="archive-text"><h3>' + esc(a.title) + '</h3><p class="archive-source">' + esc(a.source) + "</p>" +
+            (a.summary || []).map(function (p) { return "<p>" + esc(p) + "</p>"; }).join("") +
+            (a.programme && a.programme.length ? '<h3 class="programme-head">Programme</h3><dl class="programme">' +
+              a.programme.map(function (r) { return "<dt>" + esc(r[0]) + "</dt><dd>" + esc(r[1]) + "</dd>"; }).join("") + "</dl>" : "") +
+            "</div></div></div></section>";
+        }).join("") +
+
         '<section class="section" id="committee"><div class="wrap"><h2>Current committee</h2><div class="people">' +
         (C.committee || []).map(function (p) { return person(p, p.role); }).join("") + "</div></div></section>";
     },
