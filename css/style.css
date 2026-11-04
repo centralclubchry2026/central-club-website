@@ -193,6 +193,25 @@ p { margin: 0 0 1em; max-width: 68ch; }
 }
 .timeline b { font-family: var(--display); font-size: 1.5rem; display: block; line-height: 1; margin-bottom: .2rem; }
 
+/* Founders: archival portraits */
+.founders .avatar img { filter: grayscale(1) contrast(1.05); }
+
+/* Office bearers */
+table.bearers { min-width: 24rem; max-width: 46rem; }
+table.bearers td:first-child { font-family: var(--display); font-size: 1.25rem; font-weight: 700; white-space: nowrap; }
+
+/* Archive */
+.archive { display: grid; gap: var(--gap); }
+@media (min-width: 900px) { .archive { grid-template-columns: 1.15fr 1fr; align-items: start; } }
+.archive-pages { display: grid; gap: .75rem; }
+.archive-pages a { display: block; border: 1px solid var(--rule); border-radius: 4px; overflow: hidden; background: #fff; }
+.archive-pages a:hover { border-color: var(--court); }
+.archive-source { color: var(--muted); font-weight: 600; }
+.programme-head { margin-top: 1.5rem; }
+.programme { margin: 0; display: grid; grid-template-columns: minmax(8rem, auto) 1fr; gap: .45rem 1rem; border-top: 2px solid var(--ink); padding-top: .75rem; }
+.programme dt { color: var(--muted); }
+.programme dd { margin: 0; font-weight: 500; }
+
 /* Members */
 .toolbar { display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; margin-bottom: 2rem; }
 .toolbar label { font-weight: 600; }
