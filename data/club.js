@@ -18,9 +18,9 @@ window.CLUB = {
   /* ---------- Basic details ---------- */
   name: "Central Club",
   town: "Changanacherry",
-  founded: "[Year]",
+  founded: "1992",
   tagline: "Badminton, table tennis, carroms and good company, right here in Changanacherry.",
-  address: "[Building / road], Changanacherry, Kerala [PIN]",
+  address: "Ruby Nagar, Changanacherry, Kerala [PIN]",
   phone: "[+91 00000 00000]",
   email: "info@centralclubchry.com",
   mapsUrl: "https://maps.google.com/?q=Central+Club+Changanacherry",
@@ -44,22 +44,86 @@ window.CLUB = {
 
   /* ---------- About & history ---------- */
   history: [
-    "[Replace with the club's story. When did Central Club start, and who started it? What was Changanacherry like then, and why did the founders want a club?]",
-    "[How has the club grown? New courts, the indoor hall, the first tournaments, and the players the club has produced who went on to district, state or national level.]",
-    "[What the club stands for today: a place where families, working professionals and young players come together through sport, and give back through charity work.]"
+    "Central Club was formed in 1992 by seventeen shuttle badminton players in Changanacherry. The town had a proud sporting tradition, with its schools and colleges producing athletes for years, but it had fallen behind other parts of Kerala when it came to facilities. The founders decided to do something about it themselves.",
+    "They bought 14 cents of land at Ruby Nagar and built the club's own office and an indoor shuttle court, laid out as two courts so that four teams can train at the same time, with rest rooms for players, a locker for every member and seating for guests.",
+    "The new building was inaugurated on 27 December 2000. Sri Siby Mathews IPS, Inspector General of Police, inaugurated the club, and Sri C. F. Thomas MLA opened the shuttle court, at a function presided over by Municipal Chairperson Smt. Krishnakumari Rajasekharan. Malayala Manorama marked the day with a special feature that called the court a New Year gift to the sports lovers of Changanacherry.",
+    "From the start, the founders' plans went beyond their own games: bringing state and district tournaments back to Changanacherry, and free coaching for talented school and college players from families who could not afford it.",
+    "Today the club is home to badminton, table tennis and carroms, regular coaching through Michael's School of Badminton, club tournaments through the year, and charity work in the community."
   ],
 
   milestones: [
-    { year: "[Year]", text: "Central Club founded by a group of friends in Changanacherry." },
-    { year: "[Year]", text: "[First badminton court opened]" },
+    { year: "1992", text: "Central Club formed by 17 shuttle badminton players in Changanacherry." },
+    { year: "1994–95", text: "First office bearers on the club's honours board: Siby Scaria, President, and Mathew Kurian, Secretary." },
+    { year: "2000", text: "Club office and indoor shuttle court at Ruby Nagar inaugurated on 27 December, with nearly 90 members." },
     { year: "[Year]", text: "[Michael's School of Badminton starts regular coaching]" },
     { year: "2026",   text: "Club website launched at centralclubchry.com." }
   ],
 
+  /* The 17 founder members, as on the club's founders' plaque.
+     Photos are from the Malayala Manorama feature of 27 December 2000. */
   founders: [
-    { name: "[Founder name]", role: "Founding President", note: "[One line about their contribution]", photo: "" },
-    { name: "[Founder name]", role: "Founding Secretary", note: "[One line about their contribution]", photo: "" },
-    { name: "[Founder name]", role: "Founding Member",    note: "[One line about their contribution]", photo: "" }
+    { name: "Anil Mathew",           note: "Vaniapurackal",       photo: "images/founders/anil-mathew.jpg" },
+    { name: "Babu Joseph",           note: "Kallukulam",          photo: "images/founders/babu-joseph.jpg" },
+    { name: "Bobby Abraham",         note: "Manamel",             photo: "images/founders/bobby-abraham.jpg" },
+    { name: "Georgekutty M. G.",     note: "Marattukulam",        photo: "" },
+    { name: "Gigi Francis",          note: "Pulickal",            photo: "images/founders/gigi-francis.jpg" },
+    { name: "Gigi James",            note: "Koduppanapolackal",   photo: "images/founders/gigi-james.jpg" },
+    { name: "Gigen Thomas",          note: "Koippallil",          photo: "images/founders/gigen-thomas.jpg" },
+    { name: "Jojo James",            note: "Koduppanapolackal",   photo: "images/founders/jojo-james.jpg" },
+    { name: "P. F. Joseph",          note: "Pulickal",            photo: "images/founders/pf-joseph.jpg" },
+    { name: "T. A. Kannan",          note: "Thirumalathazhchayil", photo: "images/founders/ta-kannan.jpg" },
+    { name: "Mathew Kurian",         note: "Pottamkulam",         photo: "images/founders/mathew-kurian.jpg" },
+    { name: "S. R. Nambi",           note: "Selvi Nivas",         photo: "images/founders/sr-nambi.jpg", role: "Patron" },
+    { name: "Renjith Mathews",       note: "Karingada",           photo: "images/founders/renjith-mathews.jpg" },
+    { name: "T. A. Reghu",           note: "Thirumalathazhchayil", photo: "images/founders/ta-reghu.jpg" },
+    { name: "Santhosh Thomas",       note: "Perumpuzhakadavil",   photo: "images/founders/santhosh-thomas.jpg" },
+    { name: "Satheesh Valiyaveedan", note: "",                    photo: "images/founders/satheesh-valiyaveedan.jpg" },
+    { name: "Siby Scaria",           note: "Karimattom",          photo: "images/founders/siby-scaria.jpg" }
+  ],
+
+  /* Presidents and secretaries, from the club's honours board. Add new years at the bottom. */
+  officeBearers: [
+    { year: "1994–95",   president: "Siby Scaria",           secretary: "Mathew Kurian" },
+    { year: "1995–96",   president: "Anil Mathew",           secretary: "Mathew Kurian" },
+    { year: "1996–97",   president: "Siby Scaria",           secretary: "Gigi Francis" },
+    { year: "1997–98",   president: "Siby Scaria",           secretary: "Gigi Francis" },
+    { year: "1999–2000", president: "Babu Joseph",           secretary: "Mathew Kurian" },
+    { year: "2000–01",   president: "Satheesh Valiyaveedan", secretary: "Gigi Francis" },
+    { year: "2001–02",   president: "Satheesh Valiyaveedan", secretary: "Gigi Francis" },
+    { year: "2002–03",   president: "Renjith Mathews",       secretary: "Gigi James" },
+    { year: "2003–04",   president: "Anil Mathew",           secretary: "Gigi Francis" },
+    { year: "2004–05",   president: "Gigi Francis",          secretary: "Siby Mathew" },
+    { year: "2005–06",   president: "Siby Mathew",           secretary: "A. Bijumon" },
+    { year: "2006–07",   president: "K. M. Thomas",          secretary: "Joshy Abraham" },
+    { year: "2007–08",   president: "K. M. Thomas",          secretary: "A. Bijumon" },
+    { year: "2008–09",   president: "Stephen Thomas",        secretary: "Gigi Francis" },
+    { year: "2009–10",   president: "Stephen Thomas",        secretary: "Sunny Joseph" },
+    { year: "2010–11",   president: "Anil Mathew",           secretary: "Thomas Antony" },
+    { year: "2011–12",   president: "Anil Mathew",           secretary: "Thomas Antony" }
+  ],
+
+  /* From the archives: newspaper cuttings and old documents. */
+  archive: [
+    {
+      title: "Indoor shuttle court inauguration",
+      source: "Malayala Manorama (Kottayam), special feature, 27 December 2000",
+      images: ["images/archive/manorama-2000-12-27-page1.jpg", "images/archive/manorama-2000-12-27-page2.jpg"],
+      summary: [
+        "A two-page feature on the day the club's office and indoor shuttle court at Ruby Nagar opened. The lead article, by club President Satheesh Valiyaveedan, called the court Central Club's New Year gift to the sports lovers of Changanacherry.",
+        "It describes how 17 shuttle players formed the club in 1992, bought 14 cents of land, and built the office and a two-court indoor hall with rest rooms, a locker for every member and seating for guests. It also sets out the club's plans to bring state and district tournaments to the town and to offer free coaching to talented students from poorer families.",
+        "The second page shows the founder members and the names of the members behind the club at the time."
+      ],
+      programme: [
+        ["Prayer", "Sri L. P. R. Varma"],
+        ["Welcome speech", "Satheesh Valiyaveedan, President"],
+        ["Presidential address", "Smt. Krishnakumari Rajasekharan, Municipal Chairperson"],
+        ["Inauguration of the club", "Sri Siby Mathews IPS, Inspector General of Police"],
+        ["Inauguration of the shuttle court", "Sri C. F. Thomas MLA"],
+        ["Felicitation", "Sri Moncy Thoompunkal, Ward Councillor"],
+        ["Vote of thanks", "Georgekutty M. G., Treasurer"],
+        ["", "National Anthem"]
+      ]
+    }
   ],
 
   committee: [
