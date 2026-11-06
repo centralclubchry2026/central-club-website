@@ -530,3 +530,37 @@ dialog.lightbox button { margin-top: .5rem; }
   .pgroups.compact .players.compact { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .pgroups.compact .players.compact .player { width: auto; }
 }
+
+/* ---------- Coaching ---------- */
+.side-kicker { margin: 0 0 .3rem; color: var(--flood); font-weight: 700; font-size: .78rem; text-transform: uppercase; letter-spacing: .06em; }
+.chips { list-style: none; margin: .25rem 0 1rem; padding: 0; display: flex; flex-wrap: wrap; gap: .35rem; }
+.chips li { border: 1px solid rgba(255,255,255,.45); border-radius: 99px; padding: .15rem .6rem; font-size: .8rem; font-weight: 600; }
+.lede { font-size: 1.15rem; }
+.for-head { font-size: 1.5rem; }
+.for-grid { list-style: none; margin: 0; padding: 0; display: grid; gap: .6rem; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.for-grid li { background: var(--court-deep); color: var(--line); border-left: 5px solid var(--flood); border-radius: 4px; padding: .85rem 1rem; font-family: var(--display); font-weight: 800; font-size: 1.3rem; line-height: 1.05; }
+.coach-lead { display: grid; gap: 1.5rem; background: #fff; border: 1px solid var(--rule); border-radius: 10px; padding: clamp(1rem, 3vw, 1.75rem); }
+@media (min-width: 860px) { .coach-lead { grid-template-columns: 17rem minmax(0, 1fr); align-items: start; } }
+.coach-photo img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 50%; background: var(--flood); border: 5px solid var(--flood); }
+.coach-role { margin: 0; color: var(--court); font-weight: 700; text-transform: uppercase; letter-spacing: .06em; font-size: .85rem; }
+.coach-info h3, .coach-small h3 { font-size: 2.2rem; margin: .1rem 0 .7rem; }
+.creds { list-style: none; margin: 0 0 1.25rem; padding: 0; display: grid; gap: .35rem; }
+.creds li { padding-left: 1.4rem; position: relative; font-weight: 600; }
+.creds li::before { content: ""; position: absolute; left: 0; top: .5em; width: .65rem; height: .65rem; background: var(--flood); border-radius: 2px; }
+.achievements { display: grid; gap: .75rem; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.achievements figure { margin: 0; }
+.achievements img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 6px; }
+.achievements figcaption { font-size: .82rem; color: var(--muted); padding-top: .3rem; }
+.coach-small { display: flex; align-items: center; gap: 1.25rem; margin-top: 1rem; background: #fff; border: 1px solid var(--rule); border-radius: 10px; padding: 1rem 1.25rem; }
+.coach-small img { width: 6.5rem; height: 6.5rem; border-radius: 50%; object-fit: cover; border: 4px solid var(--flood); background: var(--flood); }
+.coach-small h3 { font-size: 1.8rem; margin-bottom: 0; }
+.champions-section { background: var(--court-deep); color: var(--line); }
+.champions-section h2 { color: var(--line); } .champions-section .section-lead { color: rgba(255,255,255,.8); }
+.champions { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); }
+.champion { display: grid; grid-template-columns: 8rem minmax(0, 1fr); background: var(--court); border-radius: 8px; overflow: hidden; }
+.champion img { width: 100%; height: 100%; min-height: 12rem; object-fit: cover; }
+.champion > div { padding: 1rem; }
+.champion h3 { color: var(--line); font-size: 1.6rem; margin: .4rem 0 .5rem; }
+.champion p { margin: 0 0 .35rem; font-size: .92rem; }
+.badge-inline { display: inline-block; background: var(--flood); color: var(--flood-ink); font: 700 .7rem var(--body); text-transform: uppercase; letter-spacing: .06em; padding: .2rem .5rem; border-radius: 3px; }
+@media (max-width: 600px) { .achievements { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .4rem; } .for-grid li { font-size: 1.1rem; } }

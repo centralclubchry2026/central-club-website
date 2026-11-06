@@ -21,7 +21,7 @@ window.CLUB = {
   founded: "1992",
   tagline: "Badminton, table tennis, carroms and good company, right here in Changanacherry.",
   address: "Ruby Nagar, Changanacherry, Kerala [PIN]",
-  phone: "[+91 00000 00000]",
+  phone: "+91 90611 37394",
   email: "info@centralclubchry.com",
   mapsUrl: "https://maps.google.com/?q=Central+Club+Changanacherry",
 
@@ -181,17 +181,37 @@ window.CLUB = {
   /* ---------- Coaching ---------- */
   coaching: {
     name: "Michael's School of Badminton",
-    intro: "Regular badminton coaching at Central Club for beginners and competitive players, from grip and footwork to match play.",
+    headline: "Badminton coaching at Central Club",
+    tagline: "Train with champions. Play like one.",
+    intro: "Central Club runs regular badminton coaching on its own two indoor courts at Ruby Nagar, through Michael's School of Badminton. Sessions cover everything from grip and footwork to match play, for complete beginners through to players competing at state and national level.",
+    homeIntro: "Regular coaching on Central Club's own indoor courts, from first lessons to competitive play. Run by Michael's School of Badminton, with batches for every age and level.",
+    admissions: "Admissions open · All ages · All levels",
+    phone: "+91 90611 37394",
+    forWhom: ["Boys & girls", "Men", "Women", "Seniors & masters", "Beginner to advanced", "Individual & group"],
     coaches: [
-      { name: "Michael Sebastian", role: "Chief Coach",     photo: "" },
-      { name: "Nithin",            role: "Assistant Coach", photo: "" }
+      { name: "Michael Sebastian", role: "Chief Coach", photo: "images/coaching/michael-sebastian.jpg",
+        credentials: ["BWF Certified Coach", "KBSA Certified Coach", "2× Silver Medallist for India, Masters", "National Masters Champion", "State Masters Champion"] },
+      { name: "Nithin", role: "Assistant Coach", photo: "images/coaching/nithin.jpg", credentials: [] }
+    ],
+    achievements: [
+      { photo: "images/coaching/achievement-india-korea-2023.jpg", caption: "For India, Korea 2023" },
+      { photo: "images/coaching/achievement-apmg-2023.jpg",        caption: "Medal ceremony, APMG 2023" },
+      { photo: "images/coaching/achievement-bwf-dubai-2016.jpg",   caption: "BWF Coaching Forum, Dubai 2016" }
+    ],
+    champions: [
+      { name: "Gowri Krishna T R", label: "India player", photo: "images/coaching/champion-gowri-krishna.jpg",
+        text: ["Runner-up, Women's Doubles, All India Senior Ranking 2025", "36th National Games, Gujarat 2022"] },
+      { name: "Varghese", label: "State player", photo: "images/coaching/champion-varghese.jpg",
+        text: ["Kerala State, Men's Singles", "Winners, SGFI National School Games"] },
+      { name: "Ahana Krishna", label: "State champion", photo: "images/coaching/champion-ahana-krishna.jpg",
+        text: ["Kerala State Under-13 Girls' Champion"] }
     ],
     batches: [
       { name: "Kids (beginners)", ages: "[Ages 7–12]",  days: "[Mon–Fri]",   time: "[5:00–6:00 PM]" },
       { name: "Juniors",          ages: "[Ages 12–17]", days: "[Mon–Fri]",   time: "[6:00–7:00 PM]" },
       { name: "Adults",           ages: "18+",          days: "[Sat & Sun]", time: "[6:30–8:00 AM]" }
     ],
-    enquiry: "Call [+91 00000 00000] or email info@centralclubchry.com to book a trial session."
+    enquiry: "Call +91 90611 37394 or email info@centralclubchry.com to book a trial session."
   },
 
   /* ---------- Activities ----------

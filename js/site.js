@@ -246,7 +246,9 @@
         '<aside class="home-side" aria-label="Club updates and events">' +
         '<div class="side-card"><div class="section-top"><h2>Club updates</h2><a href="news.html">All news</a></div>' + newsList((C.news || []).slice(0, 3)) + "</div>" +
         '<div class="side-card"><h2>Coming up</h2>' + eventsList(C.events) + "</div>" +
-        '<div class="side-card side-coaching"><h2>' + esc(co.name) + "</h2><p>" + esc(co.intro) + '</p><a class="btn btn-flood" href="coaching.html">Batches and timings</a></div>' +
+        '<div class="side-card side-coaching"><p class="side-kicker">' + esc(co.admissions || "") + "</p><h2>" + esc(co.headline || "Coaching") + "</h2><p>" + esc(co.homeIntro || co.intro) + "</p>" +
+        ((co.forWhom || []).length ? '<ul class="chips">' + co.forWhom.map(function (f) { return "<li>" + esc(f) + "</li>"; }).join("") + "</ul>" : "") +
+        '<a class="btn btn-flood" href="coaching.html">Coaching, batches & timings</a></div>' +
         "</aside></div></section>";
     },
 
@@ -310,16 +312,41 @@
     },
 
     coaching: function () {
-      var co = C.coaching || {};
-      main().innerHTML = pageHead(co.name, "Badminton coaching at Central Club") +
-        '<section class="section"><div class="wrap split"><div><h2>About the coaching</h2><p>' + esc(co.intro) + "</p><p>" + esc(co.enquiry) + "</p></div>" +
-        '<div><h2>Coaches</h2><div class="people">' + (co.coaches || []).map(function (c) { return person(c, c.role); }).join("") + "</div></div></div></section>" +
+      var co = C.coaching || {}, tel = String(co.phone || "").replace(/[^\d+]/g, "");
+      var lead = (co.coaches || [])[0], rest = (co.coaches || []).slice(1);
+      main().innerHTML = pageHead(co.headline || "Coaching", co.name + " · " + (co.admissions || "")) +
+
+        '<section class="section"><div class="wrap split"><div><h2>' + esc(co.tagline || "") + "</h2><p class=\"lede\">" + esc(co.intro) + "</p>" +
+        '<p class="actions">' + (tel ? '<a class="btn btn-flood" href="tel:' + esc(tel) + '">Call ' + esc(co.phone) + "</a>" : "") +
+        '<a class="btn btn-court" href="mailto:' + esc(C.email) + '?subject=Badminton%20coaching%20enquiry">Email an enquiry</a></p></div>' +
+        '<div><h3 class="for-head">Coaching for</h3><ul class="for-grid">' + (co.forWhom || []).map(function (f) { return "<li>" + esc(f) + "</li>"; }).join("") + "</ul></div></div></section>" +
+
+        (lead ? '<section class="section"><div class="wrap"><h2>The coaches</h2><div class="coach-lead">' +
+          '<div class="coach-photo">' + (lead.photo ? '<img src="' + safeUrl(lead.photo) + '" alt="' + esc(lead.name) + '" loading="lazy">' : "") + "</div>" +
+          '<div class="coach-info"><p class="coach-role">' + esc(lead.role) + "</p><h3>" + esc(lead.name) + "</h3>" +
+          ((lead.credentials || []).length ? '<ul class="creds">' + lead.credentials.map(function (c) { return "<li>" + esc(c) + "</li>"; }).join("") + "</ul>" : "") +
+          ((co.achievements || []).length ? '<div class="achievements">' + co.achievements.map(function (a) {
+            return '<figure><img src="' + safeUrl(a.photo) + '" alt="' + esc(a.caption) + '" loading="lazy"><figcaption>' + esc(a.caption) + "</figcaption></figure>";
+          }).join("") + "</div>" : "") + "</div></div>" +
+          rest.map(function (c) {
+            return '<div class="coach-small">' + (c.photo ? '<img src="' + safeUrl(c.photo) + '" alt="' + esc(c.name) + '" loading="lazy">' : "") +
+              '<div><p class="coach-role">' + esc(c.role) + "</p><h3>" + esc(c.name) + "</h3></div></div>";
+          }).join("") + "</div></section>" : "") +
+
+        ((co.champions || []).length ? '<section class="section champions-section"><div class="wrap"><h2>Our champions</h2><p class="section-lead">Trained on Central Club\'s courts. Competing for Kerala and India.</p><div class="champions">' +
+          co.champions.map(function (ch) {
+            return '<article class="champion"><img src="' + safeUrl(ch.photo) + '" alt="' + esc(ch.name) + '" loading="lazy"><div><span class="badge-inline">' + esc(ch.label) + "</span><h3>" + esc(ch.name) + "</h3>" +
+              (ch.text || []).map(function (t) { return "<p>" + esc(t) + "</p>"; }).join("") + "</div></article>";
+          }).join("") + "</div></div></section>" : "") +
+
         '<section class="section"><div class="wrap"><h2>Batches and timings</h2><div class="batches">' +
         (co.batches || []).map(function (b) {
           return '<div class="batch"><h3>' + esc(b.name) + "</h3><dl><dt>Ages</dt><dd>" + esc(b.ages) + "</dd><dt>Days</dt><dd>" + esc(b.days) + "</dd><dt>Time</dt><dd>" + esc(b.time) + "</dd></dl></div>";
         }).join("") + "</div></div></section>" +
+
         '<section class="section"><div class="wrap"><div class="callout"><div><h2>Book a trial session</h2><p>' + esc(co.enquiry) + "</p></div>" +
-        '<div><a class="btn btn-flood" href="mailto:' + esc(C.email) + '?subject=Badminton%20coaching%20enquiry">Email a coaching enquiry</a></div></div></div></section>';
+        '<div class="actions">' + (tel ? '<a class="btn btn-flood" href="tel:' + esc(tel) + '">Call now</a>' : "") +
+        '<a class="btn btn-line" href="mailto:' + esc(C.email) + '?subject=Badminton%20coaching%20enquiry">Email</a></div></div></div></section>';
     },
 
     activities: function () {
