@@ -444,3 +444,89 @@ dialog.lightbox button { margin-top: .5rem; }
 .slide.is-contain img { object-fit: contain; }
 .slide.is-contain::after { background: linear-gradient(0deg, rgba(8,40,29,.9) 0%, rgba(8,40,29,0) 22%); }
 @media (min-width: 860px) { .slide.is-contain figcaption { display: none; } }
+
+/* ---------- Home: results with an updates sidebar ---------- */
+.home-main { padding-top: clamp(2rem, 5vw, 3rem); }
+.home-grid { display: grid; gap: 2rem; }
+.home-grid > * { min-width: 0; }
+@media (min-width: 1000px) {
+  .home-grid { grid-template-columns: minmax(0, 1fr) 21rem; align-items: start; }
+  .home-side { position: sticky; top: 5.5rem; }
+}
+.home-results .tournament + .tournament { margin-top: 2rem; padding-top: 1.75rem; }
+.home-results .tournament-head h3 { font-size: clamp(1.5rem, 3vw, 1.9rem); }
+.home-results .player-group { font-size: 1.25rem; margin: 1rem 0 .6rem; }
+.home-results .tournament-note { margin: .25rem 0 0; font-size: .95rem; }
+.players.compact { grid-template-columns: repeat(auto-fill, minmax(8.75rem, 1fr)); gap: .75rem; }
+.players.compact .player-photo { aspect-ratio: 1 / 1; }
+.players.compact .player-name { font-size: 1.12rem; }
+.players.compact .player-event { font-size: .78rem; }
+.players.compact .player-text { padding: .5rem .6rem .65rem; }
+.players.compact .badge { font-size: .65rem; left: .45rem; bottom: .45rem; padding: .2rem .45rem; }
+.home-side { display: grid; gap: 1rem; }
+.side-card { background: #fff; border: 1px solid var(--rule); border-radius: 8px; padding: 1.1rem 1.2rem; }
+.side-card h2 { font-size: 1.7rem; margin-bottom: .6rem; }
+.side-card .news-list li { padding: .7rem 0; }
+.side-card .news-list h3 { font-size: 1.2rem; }
+.side-card .news-list p { font-size: .92rem; }
+.side-coaching { background: var(--court-deep); color: var(--line); border: 0; }
+.side-coaching h2 { color: var(--line); font-size: 1.5rem; }
+.side-coaching p { font-size: .95rem; opacity: .92; }
+.event-list { list-style: none; margin: 0; padding: 0; }
+.event-list li { display: grid; padding: .6rem 0; border-bottom: 1px solid var(--rule); }
+.event-list li:last-child { border-bottom: 0; }
+.event-date { font-weight: 700; color: var(--court); font-size: .85rem; }
+.event-list span:last-child { color: var(--muted); font-size: .9rem; }
+
+/* ---------- About: story, milestones, club photos, office bearers ---------- */
+.story { display: grid; gap: var(--gap); }
+@media (min-width: 900px) { .story { grid-template-columns: minmax(0, 1.25fr) minmax(0, .75fr); align-items: start; } }
+.story-text p { max-width: 62ch; }
+.story-text .lede { font-size: 1.2rem; font-weight: 500; }
+.story-photos { display: grid; gap: 1rem; }
+.story-photos figure, .club-photos figure { margin: 0; }
+.story-photos img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 8px; }
+.story-photos figcaption, .club-photos figcaption { color: var(--muted); font-size: .9rem; padding-top: .35rem; }
+
+.milestones-section { background: var(--court); color: var(--line); }
+.milestones-section h2 { color: var(--line); }
+.milestones { list-style: none; margin: 1.5rem 0 0; padding: 0; position: relative; display: grid; gap: 1.5rem; }
+.milestones li { position: relative; }
+.m-year { display: block; font-family: var(--display); font-weight: 800; font-size: 2.4rem; line-height: 1; color: var(--flood); }
+.m-dot { display: block; width: 1.1rem; height: 1.1rem; border-radius: 50%; background: var(--flood); border: 3px solid var(--line); margin: .7rem 0; position: relative; z-index: 1; }
+.milestones p { margin: 0; max-width: 28ch; }
+@media (min-width: 860px) {
+  .milestones { grid-auto-flow: column; grid-auto-columns: 1fr; gap: 1.25rem; }
+  .milestones::before { content: ""; position: absolute; left: 0; right: 0; top: 3.4rem; height: 3px; background: rgba(255,255,255,.55); }
+}
+@media (max-width: 859px) {
+  .milestones { padding-left: 1.5rem; border-left: 3px solid rgba(255,255,255,.55); }
+  .m-dot { position: absolute; left: -2.25rem; top: .55rem; margin: 0; }
+}
+
+.club-photos { display: grid; gap: .75rem; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.club-photos img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 6px; }
+@media (max-width: 700px) { .club-photos { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+.bearers-grid { list-style: none; margin: 0; padding: 0; display: grid; gap: .9rem; grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr)); }
+.bearers-grid li { background: #fff; border: 1px solid var(--rule); border-top: 5px solid var(--court); border-radius: 6px; padding: 1rem 1.1rem; }
+.bearers-grid li:first-child { border-top-color: var(--flood); }
+.b-year { display: block; font-family: var(--display); font-weight: 800; font-size: 1.9rem; line-height: 1; color: var(--court); margin-bottom: .6rem; }
+.bearers-grid dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: .25rem .75rem; align-items: baseline; }
+.bearers-grid dt { color: var(--muted); font-size: .78rem; text-transform: uppercase; letter-spacing: .05em; font-weight: 600; }
+.bearers-grid dd { margin: 0; font-weight: 700; }
+.pgroups.compact { display: flex; flex-wrap: wrap; gap: 0 1.75rem; }
+.pgroups.compact .pgroup { flex: 0 1 auto; min-width: 0; }
+.pgroups.compact .players.compact { grid-template-columns: repeat(auto-fill, 8.75rem); }
+.pgroups.compact .pgroup:only-child, .pgroups.compact .pgroup { max-width: 100%; }
+.side-card .news-list p { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+@media (max-width: 600px) {
+  .pgroups.compact { display: block; }
+  .pgroups.compact .players.compact { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+.pgroups.compact .players.compact { display: flex; flex-wrap: wrap; gap: .75rem; }
+.pgroups.compact .players.compact .player { width: 8.75rem; flex: none; }
+@media (max-width: 600px) {
+  .pgroups.compact .players.compact { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .pgroups.compact .players.compact .player { width: auto; }
+}

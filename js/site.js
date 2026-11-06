@@ -139,6 +139,12 @@
         (n.link ? ' <a' + ext(n.link) + ">Read more</a>" : "") + "</p></li>";
     }).join("") + "</ul>";
   }
+  function eventsList(items) {
+    if (!items || !items.length) return '<p class="empty">Nothing scheduled right now.</p>';
+    return '<ul class="event-list">' + items.map(function (e) {
+      return '<li><span class="event-date">' + fmtDate(e.date) + '</span><strong>' + esc(e.title) + "</strong><span>" + esc(e.place) + "</span></li>";
+    }).join("") + "</ul>";
+  }
   function eventsTable(items) {
     if (!items || !items.length) return '<p class="empty">No events scheduled right now.</p>';
     return '<div class="table-wrap"><table><thead><tr><th>Date</th><th>Event</th><th>Where</th></tr></thead><tbody>' +
@@ -168,10 +174,10 @@
       '<div class="tournament-head"><h3>' + esc(t.name) + "</h3><p>" + fmtDate(t.date) + (t.venue ? " · " + esc(t.venue) : "") + "</p></div>" +
       (t.note ? '<p class="tournament-note">' + esc(t.note) + "</p>" : "") +
       (pls.length
-        ? groups.map(function (g) {
-            return (g ? '<h4 class="player-group">' + esc(g) + "</h4>" : "") + '<div class="players">' +
-              pls.filter(function (pl) { return (pl.group || "") === g; }).map(playerCard).join("") + "</div>";
-          }).join("")
+        ? '<div class="pgroups' + (compact ? " compact" : "") + '">' + groups.map(function (g) {
+            return '<div class="pgroup">' + (g ? '<h4 class="player-group">' + esc(g) + "</h4>" : "") + '<div class="players' + (compact ? " compact" : "") + '">' +
+              pls.filter(function (pl) { return (pl.group || "") === g; }).map(playerCard).join("") + "</div></div>";
+          }).join("") + "</div>"
         : "") +
       (!compact || !pls.length ? (t.categories && t.categories.length ? '<h4 class="player-group">All results</h4>' + resultsTable(t.categories) : "") : "") +
       (!compact && t.groupPhoto ? '<figure class="group-photo"><img src="' + safeUrl(t.groupPhoto) + '" alt="' + esc(t.groupCaption || t.name) + '" loading="lazy"><figcaption>' + esc(t.groupCaption || "") + "</figcaption></figure>" : "") +
@@ -224,7 +230,7 @@
   /* ---------- pages ---------- */
   var PAGES = {
     home: function () {
-      var co = C.coaching || {}, latest = (C.tournaments || [])[0], fac = C.facilities || [];
+      var co = C.coaching || {}, ts = C.tournaments || [];
       main().innerHTML =
         ((C.heroSlides || []).length ? '<section class="hero hero-slideshow">' + heroSlideshow(C.heroSlides) + '<div class="wrap hero-grid"><div class="hero-text">' :
         (C.heroImage ? '<section class="hero hero-photo"><img class="hero-bg" src="' + safeUrl(C.heroImage) + '" alt="">' : '<section class="hero">') + COURT + '<div class="wrap hero-grid"><div class="hero-text">') +
@@ -234,64 +240,46 @@
         '<div class="actions"><a class="btn btn-flood" href="coaching.html">Join badminton coaching</a>' +
         '<a class="btn btn-line" href="news.html#results">Latest results</a></div></div>' + ((C.heroSlides || []).length || C.heroImage ? "" : heroMedia()) + "</div></section>" +
 
-        (latest ? '<section class="section"><div class="wrap"><div class="section-top"><h2>Latest results</h2><a href="news.html#results">All results</a></div>' +
-          (C.tournaments || []).slice(0, 2).map(function (t) { return tournamentBlock(t, true); }).join("") + "</div></section>" : "") +
-
-        '<section class="section"><div class="wrap"><h2>What we play</h2>' +
-        activityList(C.activities, true) + '<p class="actions"><a href="activities.html">More about club activities</a></p></div></section>' +
-
-        (fac.length ? '<section class="section"><div class="wrap"><div class="section-top"><h2>The club</h2><a href="gallery.html">Gallery</a></div><div class="facility-strip">' +
-          fac.map(function (f) { return '<figure><img src="' + safeUrl(f.photo) + '" alt="' + esc(f.caption) + '" loading="lazy"><figcaption>' + esc(f.caption) + "</figcaption></figure>"; }).join("") +
-          "</div></div></section>" : "") +
-
-        '<section class="section"><div class="wrap split">' +
-        "<div><h2>Club updates</h2>" + newsList((C.news || []).slice(0, 3)) + '<p class="actions"><a href="news.html">All news</a></p></div>' +
-        "<div><h2>Coming up</h2>" + eventsTable(C.events) + "</div></div></section>" +
-
-        '<section class="section"><div class="wrap"><div class="callout"><div><h2>' + esc(co.name) + "</h2><p>" + esc(co.intro) + "</p><p>" +
-        (co.coaches || []).map(function (c) { return esc(c.name) + ", " + esc(c.role); }).join("<br>") + "</p></div>" +
-        '<div><p>' + esc(co.enquiry) + '</p><a class="btn btn-flood" href="coaching.html">See batches and timings</a></div></div></div></section>' +
-
-        '<section class="section"><div class="wrap split"><div><h2>Visit the club</h2><p>' + esc(C.address) + "</p>" +
-        '<p class="actions"><a class="btn btn-court" href="' + safeUrl(C.mapsUrl) + '" target="_blank" rel="noopener noreferrer">Open in Google Maps</a>' +
-        '<a class="btn btn-court" href="mailto:' + esc(C.email) + '">Email the club</a></p></div>' +
-        "<div><h2>The people behind the club</h2><p>Founded in " + esc(C.founded) + " by seventeen shuttle players. Meet the founders, and the members who keep it going today.</p>" +
-        '<p class="actions"><a href="about.html#founders">The founding team</a><a href="members.html">Our members</a></p></div></div></section>';
+        '<section class="section home-main"><div class="wrap home-grid">' +
+        '<div class="home-results"><div class="section-top"><h2>Latest results</h2><a href="news.html#results">All results</a></div>' +
+        (ts.length ? ts.slice(0, 2).map(function (t) { return tournamentBlock(t, true); }).join("") : '<p class="empty">Results will appear here after each tournament.</p>') + "</div>" +
+        '<aside class="home-side" aria-label="Club updates and events">' +
+        '<div class="side-card"><div class="section-top"><h2>Club updates</h2><a href="news.html">All news</a></div>' + newsList((C.news || []).slice(0, 3)) + "</div>" +
+        '<div class="side-card"><h2>Coming up</h2>' + eventsList(C.events) + "</div>" +
+        '<div class="side-card side-coaching"><h2>' + esc(co.name) + "</h2><p>" + esc(co.intro) + '</p><a class="btn btn-flood" href="coaching.html">Batches and timings</a></div>' +
+        "</aside></div></section>";
     },
 
     about: function () {
-      var ob = C.officeBearers || [], arc = C.archive || [];
+      var ob = C.officeBearers || [], fac = C.clubPhotos || C.facilities || [], cm = (C.committee || []).filter(function (p) { return p.name && p.name.indexOf("[") !== 0; });
       main().innerHTML = pageHead("About the club", "Est. " + C.founded + " in " + C.town) +
-        '<section class="section"><div class="wrap split"><div><h2>Our story</h2>' +
-        (C.history || []).map(function (p) { return "<p>" + esc(p) + "</p>"; }).join("") + "</div>" +
-        '<div><h2>Milestones</h2><ol class="timeline">' +
-        (C.milestones || []).map(function (m) { return "<li><b>" + esc(m.year) + "</b>" + esc(m.text) + "</li>"; }).join("") +
-        "</ol></div></div></section>" +
+
+        '<section class="section"><div class="wrap story"><div class="story-text"><h2>Our story</h2>' +
+        (C.history || []).map(function (p, i) { return "<p" + (i === 0 ? ' class="lede"' : "") + ">" + esc(p) + "</p>"; }).join("") + "</div>" +
+        (fac.length ? '<div class="story-photos">' + fac.slice(0, 2).map(function (f) { return '<figure><img src="' + safeUrl(f.photo) + '" alt="' + esc(f.caption) + '" loading="lazy"><figcaption>' + esc(f.caption) + "</figcaption></figure>"; }).join("") + "</div>" : "") +
+        "</div></section>" +
+
+        '<section class="section milestones-section"><div class="wrap"><h2>Milestones</h2><ol class="milestones">' +
+        (C.milestones || []).map(function (m) { return '<li><span class="m-year">' + esc(m.year) + '</span><span class="m-dot" aria-hidden="true"></span><p>' + esc(m.text) + "</p></li>"; }).join("") +
+        "</ol></div></section>" +
+
+        (fac.length ? '<section class="section" id="the-club"><div class="wrap"><div class="section-top"><h2>The club</h2><a href="gallery.html">Gallery</a></div><div class="club-photos">' +
+          fac.map(function (f) { return '<figure><img src="' + safeUrl(f.photo) + '" alt="' + esc(f.caption) + '" loading="lazy"><figcaption>' + esc(f.caption) + "</figcaption></figure>"; }).join("") +
+          "</div></div></section>" : "") +
+
+        '<section class="section" id="activities"><div class="wrap"><h2>What we play</h2>' + activityList(C.activities, true) + "</div></section>" +
 
         '<section class="section" id="founders"><div class="wrap"><h2>The founding team</h2><p class="section-lead">The ' +
         (C.founders || []).length + " founder members of Central Club. Photographs from the year 2000.</p><div class=\"people founders\">" +
         (C.founders || []).map(function (p) { return person(p, p.note, p.role); }).join("") + "</div></div></section>" +
 
-        (ob.length ? '<section class="section" id="office-bearers"><div class="wrap"><h2>Office bearers through the years</h2>' +
-          '<div class="table-wrap"><table class="bearers"><thead><tr><th>Year</th><th>President</th><th>Secretary</th></tr></thead><tbody>' +
-          ob.slice().reverse().map(function (r) { return "<tr><td>" + esc(r.year) + "</td><td>" + esc(r.president) + "</td><td>" + esc(r.secretary) + "</td></tr>"; }).join("") +
-          "</tbody></table></div></div></section>" : "") +
+        (ob.length ? '<section class="section" id="office-bearers"><div class="wrap"><h2>Office bearers through the years</h2><p class="section-lead">Presidents and secretaries since ' + esc(ob[0].year) + ".</p>" +
+          '<ol class="bearers-grid">' + ob.slice().reverse().map(function (r) {
+            return '<li><span class="b-year">' + esc(r.year) + '</span><dl><dt>President</dt><dd>' + esc(r.president) + "</dd><dt>Secretary</dt><dd>" + esc(r.secretary) + "</dd></dl></li>";
+          }).join("") + "</ol></div></section>" : "") +
 
-        arc.map(function (a) {
-          return '<section class="section" id="archive"><div class="wrap"><h2>From the archives</h2>' +
-            '<div class="archive"><div class="archive-pages">' +
-            (a.images || []).map(function (im, i) {
-              return '<a href="' + safeUrl(im) + '" target="_blank" rel="noopener"><img src="' + safeUrl(im) + '" alt="' + esc(a.title) + ", page " + (i + 1) + '" loading="lazy"></a>';
-            }).join("") + "</div>" +
-            '<div class="archive-text"><h3>' + esc(a.title) + '</h3><p class="archive-source">' + esc(a.source) + "</p>" +
-            (a.summary || []).map(function (p) { return "<p>" + esc(p) + "</p>"; }).join("") +
-            (a.programme && a.programme.length ? '<h3 class="programme-head">Programme</h3><dl class="programme">' +
-              a.programme.map(function (r) { return "<dt>" + esc(r[0]) + "</dt><dd>" + esc(r[1]) + "</dd>"; }).join("") + "</dl>" : "") +
-            "</div></div></div></section>";
-        }).join("") +
-
-        '<section class="section" id="committee"><div class="wrap"><h2>Current committee</h2><div class="people">' +
-        (C.committee || []).map(function (p) { return person(p, p.role); }).join("") + "</div></div></section>";
+        (cm.length ? '<section class="section" id="committee"><div class="wrap"><h2>Current committee</h2><div class="people">' +
+          cm.map(function (p) { return person(p, p.role); }).join("") + "</div></div></section>" : "");
     },
 
     members: function () {
