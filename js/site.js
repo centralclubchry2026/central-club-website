@@ -146,23 +146,59 @@
       "</tbody></table></div>";
   }
 
+  /* Tournament results */
+  function resultCard(c) {
+    return '<article class="result"><h4>' + esc(c.event) + "</h4>" +
+      '<div class="result-photo">' + (c.winnerPhoto
+        ? '<img src="' + safeUrl(c.winnerPhoto) + '" alt="' + esc(c.winner) + ", " + esc(c.event) + ' winner" loading="lazy">'
+        : '<span aria-hidden="true">' + initials(c.winner) + "</span>") +
+      '<span class="badge">Winner</span></div>' +
+      '<p class="result-winner">' + esc(c.winner) + "</p>" +
+      (c.runnerUp ? '<p class="result-runner">' + (c.runnerUpPhoto ? '<img src="' + safeUrl(c.runnerUpPhoto) + '" alt="" loading="lazy">' : '<span class="mini" aria-hidden="true">' + initials(c.runnerUp) + "</span>") +
+        "<span><small>Runner-up</small>" + esc(c.runnerUp) + "</span></p>" : "") +
+      "</article>";
+  }
+  function tournamentBlock(t, compact) {
+    return '<div class="tournament">' +
+      '<div class="tournament-head"><h3>' + esc(t.name) + "</h3><p>" + fmtDate(t.date) + (t.venue ? " · " + esc(t.venue) : "") + "</p></div>" +
+      '<div class="results-grid">' + (t.categories || []).map(resultCard).join("") + "</div>" +
+      (t.note ? '<p class="tournament-note">' + esc(t.note) + "</p>" : "") +
+      (!compact && t.groupPhoto ? '<figure class="group-photo"><img src="' + safeUrl(t.groupPhoto) + '" alt="' + esc(t.groupCaption || t.name) + '" loading="lazy"><figcaption>' + esc(t.groupCaption || "") + "</figcaption></figure>" : "") +
+      "</div>";
+  }
+  function heroMedia() {
+    var v = C.heroVideo || {};
+    if (!v.file && !v.poster) return "";
+    var still = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    return '<div class="hero-media">' + (v.file && !still
+      ? '<video autoplay muted loop playsinline preload="metadata" poster="' + safeUrl(v.poster) + '" aria-label="Badminton at Central Club"><source src="' + safeUrl(v.file) + '" type="video/mp4"></video>'
+      : '<img src="' + safeUrl(v.poster) + '" alt="Badminton at Central Club">') + "</div>";
+  }
+
   /* ---------- pages ---------- */
   var PAGES = {
     home: function () {
-      var co = C.coaching || {};
+      var co = C.coaching || {}, latest = (C.tournaments || [])[0], fac = C.facilities || [];
       main().innerHTML =
-        '<section class="hero">' + COURT + '<div class="wrap">' +
+        (C.heroImage ? '<section class="hero hero-photo"><img class="hero-bg" src="' + safeUrl(C.heroImage) + '" alt="">' : '<section class="hero">') + COURT + '<div class="wrap hero-grid"><div class="hero-text">' +
         "<h1>" + esc(C.name) + '<span class="town">' + esc(C.town) + "</span></h1>" +
         "<p>" + esc(C.tagline) + "</p>" +
         '<p class="since">Est. ' + esc(C.founded) + "</p>" +
         '<div class="actions"><a class="btn btn-flood" href="coaching.html">Join badminton coaching</a>' +
-        '<a class="btn btn-line" href="news.html">Latest news & results</a></div></div></section>' +
+        '<a class="btn btn-line" href="news.html#results">Latest results</a></div></div>' + (C.heroImage ? "" : heroMedia()) + "</div></section>" +
+
+        (latest ? '<section class="section"><div class="wrap"><div class="section-top"><h2>Latest results</h2><a href="news.html#results">All results</a></div>' +
+          tournamentBlock(latest, true) + "</div></section>" : "") +
 
         '<section class="section"><div class="wrap"><h2>What we play</h2>' +
         activityList(C.activities, true) + '<p class="actions"><a href="activities.html">More about club activities</a></p></div></section>' +
 
+        (fac.length ? '<section class="section"><div class="wrap"><div class="section-top"><h2>The club</h2><a href="gallery.html">Gallery</a></div><div class="facility-strip">' +
+          fac.map(function (f) { return '<figure><img src="' + safeUrl(f.photo) + '" alt="' + esc(f.caption) + '" loading="lazy"><figcaption>' + esc(f.caption) + "</figcaption></figure>"; }).join("") +
+          "</div></div></section>" : "") +
+
         '<section class="section"><div class="wrap split">' +
-        "<div><h2>Club updates</h2>" + newsList((C.news || []).slice(0, 3)) + '<p class="actions"><a href="news.html">All news and results</a></p></div>' +
+        "<div><h2>Club updates</h2>" + newsList((C.news || []).slice(0, 3)) + '<p class="actions"><a href="news.html">All news</a></p></div>' +
         "<div><h2>Coming up</h2>" + eventsTable(C.events) + "</div></div></section>" +
 
         '<section class="section"><div class="wrap"><div class="callout"><div><h2>' + esc(co.name) + "</h2><p>" + esc(co.intro) + "</p><p>" +
@@ -172,7 +208,7 @@
         '<section class="section"><div class="wrap split"><div><h2>Visit the club</h2><p>' + esc(C.address) + "</p>" +
         '<p class="actions"><a class="btn btn-court" href="' + safeUrl(C.mapsUrl) + '" target="_blank" rel="noopener noreferrer">Open in Google Maps</a>' +
         '<a class="btn btn-court" href="mailto:' + esc(C.email) + '">Email the club</a></p></div>' +
-        "<div><h2>The people behind the club</h2><p>Meet the people who started Central Club, and the members who keep it going today.</p>" +
+        "<div><h2>The people behind the club</h2><p>Founded in " + esc(C.founded) + " by seventeen shuttle players. Meet the founders, and the members who keep it going today.</p>" +
         '<p class="actions"><a href="about.html#founders">The founding team</a><a href="members.html">Our members</a></p></div></div></section>';
     },
 
@@ -258,22 +294,18 @@
     },
 
     news: function () {
-      var r = C.results || [];
+      var ts = C.tournaments || [];
       main().innerHTML = pageHead("News & results", "Notices, tournament updates and results") +
         (C.live && C.live.active
           ? '<section class="section"><div class="wrap"><div class="callout"><div><h2>Live now</h2><p>' + esc(C.live.title) + '</p></div><div class="actions">' +
             (C.live.streamUrl ? '<a class="btn btn-flood"' + ext(C.live.streamUrl) + ">Watch on YouTube</a>" : "") +
             (C.live.scoresUrl ? '<a class="btn btn-line"' + ext(C.live.scoresUrl) + ">Live scores</a>" : "") + "</div></div></div></section>"
           : "") +
-        '<section class="section"><div class="wrap split"><div><h2>Updates</h2>' + newsList(C.news) + "</div>" +
-        "<div><h2>Coming up</h2>" + eventsTable(C.events) + "</div></div></section>" +
         '<section class="section" id="results"><div class="wrap"><h2>Results</h2>' +
-        (r.length
-          ? '<div class="table-wrap"><table><thead><tr><th>Tournament</th><th>Category</th><th>Winners</th><th>Runners-up</th></tr></thead><tbody>' +
-            r.map(function (x) { return "<tr><td>" + esc(x.tournament) + "</td><td>" + esc(x.category) + "</td><td>" + esc(x.winner) + "</td><td>" + esc(x.runnerUp) + "</td></tr>"; }).join("") +
-            "</tbody></table></div>"
-          : '<p class="empty">Results will appear here after each tournament.</p>') +
-        "</div></section>";
+        (ts.length ? ts.map(function (t) { return tournamentBlock(t, false); }).join("") : '<p class="empty">Results will appear here after each tournament.</p>') +
+        "</div></section>" +
+        '<section class="section"><div class="wrap split"><div><h2>Updates</h2>' + newsList(C.news) + "</div>" +
+        "<div><h2>Coming up</h2>" + eventsTable(C.events) + "</div></div></section>";
     },
 
     gallery: function () {
@@ -289,6 +321,7 @@
         '<section class="section"><div class="wrap"><h2>Videos</h2><div class="videos">' +
         vids.map(function (v) {
           var id = String(v.youtubeId || "").replace(/[^\w-]/g, "");
+          if (v.file) return '<figure class="video video-file"><div class="video-frame tall"><video controls playsinline preload="none" poster="' + safeUrl(v.poster) + '"><source src="' + safeUrl(v.file) + '" type="video/mp4"></video></div><figcaption>' + esc(v.title) + "</figcaption></figure>";
           return '<figure class="video"><div class="video-frame">' + (id
             ? '<button type="button" data-yt="' + id + '" aria-label="Play ' + esc(v.title) + '"><img src="https://i.ytimg.com/vi/' + id + '/hqdefault.jpg" alt="" loading="lazy"><span class="play"></span></button>'
             : '<div class="photo-empty">Video coming soon</div>') +

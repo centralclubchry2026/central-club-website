@@ -135,6 +135,7 @@ p { margin: 0 0 1em; max-width: 68ch; }
 .section + .section { border-top: 2px solid var(--rule); }
 .section-lead { color: var(--muted); font-size: 1.1rem; margin-bottom: 2rem; }
 .split { display: grid; gap: var(--gap); }
+.split > *, .hero-grid > *, .archive > * { min-width: 0; }
 @media (min-width: 860px) { .split { grid-template-columns: 1fr 1fr; align-items: start; } }
 
 /* Activities: a list ruled like court lines, not identical cards */
@@ -293,4 +294,73 @@ dialog.lightbox button { margin-top: .5rem; }
 
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }
+}
+
+/* ---------- Hero with video ---------- */
+.hero-grid { display: grid; gap: 2rem; align-items: center; }
+@media (min-width: 860px) { .hero-grid { grid-template-columns: 1.25fr .75fr; } }
+.hero-media {
+  justify-self: center; width: min(100%, 19rem); aspect-ratio: 9 / 16;
+  border: 3px solid var(--line); border-radius: 14px; overflow: hidden; background: var(--court-deep);
+  box-shadow: 0 1.5rem 3rem rgba(0,0,0,.35);
+}
+.hero-media video, .hero-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+@media (max-width: 859px) { .hero-media { width: min(100%, 15rem); } }
+
+.section-top { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: .5rem 1rem; }
+.section-top a { font-weight: 600; }
+
+/* ---------- Tournament results ---------- */
+.tournament + .tournament { margin-top: 3.5rem; padding-top: 2.5rem; border-top: 2px solid var(--rule); }
+.tournament-head { border-left: 6px solid var(--flood); padding-left: 1rem; margin-bottom: 1.5rem; }
+.tournament-head h3 { font-size: clamp(1.8rem, 4vw, 2.4rem); margin-bottom: .2rem; }
+.tournament-head p { margin: 0; color: var(--muted); font-weight: 600; }
+.results-grid { display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr)); }
+.result { background: #fff; border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; }
+.result h4 { margin: 0; padding: .7rem 1rem; background: var(--court-deep); color: var(--line); font-family: var(--display); font-size: 1.35rem; font-weight: 700; letter-spacing: .01em; }
+.result-photo { position: relative; aspect-ratio: 4 / 5; background: var(--court); display: flex; align-items: center; justify-content: center; color: var(--line); font-family: var(--display); font-weight: 800; font-size: 3rem; }
+.result-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; }
+.badge { position: absolute; left: .75rem; bottom: .75rem; background: var(--flood); color: var(--flood-ink); font: 700 .8rem var(--body); text-transform: uppercase; letter-spacing: .06em; padding: .3rem .6rem; border-radius: 3px; }
+.result-winner { margin: 0; padding: .8rem 1rem .2rem; font-family: var(--display); font-size: 1.6rem; font-weight: 800; line-height: 1.05; }
+.result-runner { margin: auto 0 0; padding: .6rem 1rem 1rem; display: flex; gap: .65rem; align-items: center; font-weight: 600; }
+.result-runner img, .result-runner .mini { width: 2.6rem; height: 2.6rem; border-radius: 50%; object-fit: cover; object-position: center 20%; flex: none; }
+.result-runner .mini { background: var(--court); color: var(--line); display: inline-flex; align-items: center; justify-content: center; font: 700 .9rem var(--body); }
+.result-runner small { display: block; color: var(--muted); font-weight: 500; font-size: .8rem; text-transform: uppercase; letter-spacing: .05em; }
+.tournament-note { margin-top: 1.25rem; font-weight: 600; color: var(--court); }
+.group-photo { margin: 2rem 0 0; }
+.group-photo img { width: 100%; max-height: 42rem; object-fit: cover; border-radius: 8px; }
+.group-photo figcaption { color: var(--muted); padding-top: .5rem; }
+
+/* ---------- Club photo strip ---------- */
+.facility-strip { display: grid; gap: .75rem; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); }
+.facility-strip figure { margin: 0; }
+.facility-strip img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 6px; }
+.facility-strip figcaption { padding-top: .4rem; font-size: .95rem; color: var(--muted); }
+
+/* Portrait video clips in the gallery */
+.video-frame.tall { aspect-ratio: 9 / 16; max-height: 34rem; }
+.video-frame.tall video { width: 100%; height: 100%; object-fit: cover; background: var(--court-deep); }
+.videos:has(.video-file) { grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr)); }
+@media (max-width: 600px) {
+  .results-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem; }
+  .result h4 { font-size: 1.05rem; padding: .55rem .7rem; }
+  .result-winner { font-size: 1.2rem; padding: .6rem .7rem .1rem; }
+  .result-runner { padding: .5rem .7rem .8rem; font-size: .85rem; gap: .5rem; }
+  .result-runner img, .result-runner .mini { width: 2rem; height: 2rem; }
+  .badge { font-size: .7rem; left: .5rem; bottom: .5rem; }
+  .facility-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* Hero with a full-width court photo */
+.hero-photo { min-height: min(88vh, 46rem); display: flex; align-items: flex-end; }
+.hero-photo .hero-bg { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 55%; }
+.hero-photo::before {
+  content: ""; position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(90deg, rgba(12,58,42,.92) 0%, rgba(12,58,42,.72) 45%, rgba(12,58,42,.25) 100%);
+}
+.hero-photo .court-lines { z-index: 1; stroke: rgba(255,255,255,.12); }
+.hero-photo .wrap { z-index: 2; width: 100%; }
+.hero-photo .hero-grid { grid-template-columns: 1fr; }
+@media (max-width: 859px) {
+  .hero-photo::before { background: linear-gradient(0deg, rgba(12,58,42,.95) 0%, rgba(12,58,42,.75) 55%, rgba(12,58,42,.35) 100%); }
 }

@@ -25,6 +25,20 @@ window.CLUB = {
   email: "info@centralclubchry.com",
   mapsUrl: "https://maps.google.com/?q=Central+Club+Changanacherry",
 
+  /* Home page background photo: a wide, empty court looks best. Leave "" to use the video panel instead. */
+  heroImage: "images/club/hero-court.jpg",
+
+  /* Home page video: short, muted, looping (used when heroImage is ""). */
+  heroVideo: { file: "videos/hero-courts.mp4", poster: "images/club/hero-poster.jpg" },
+
+  /* Photos of the club, shown on the home page and in the gallery. */
+  facilities: [
+    { photo: "images/club/courts-overhead.jpg",  caption: "Two indoor courts, seen from the gallery" },
+    { photo: "images/club/courts-play-1.jpg",    caption: "Evening games on court 2" },
+    { photo: "images/club/covered-walkway.jpg",  caption: "The covered walkway to the courts" },
+    { photo: "images/club/courts-play-2.jpg",    caption: "Doubles on court 1" }
+  ],
+
   social: {
     youtube:   "https://www.youtube.com/",   // replace with the club channel link
     facebook:  "https://www.facebook.com/",  // replace with the club page link
@@ -182,23 +196,62 @@ window.CLUB = {
     { date: "[Jan 2027]", title: "[Annual general body meeting]",   place: "Club hall" }
   ],
 
-  /* ---------- Results ---------- */
-  results: [
-    { tournament: "Home Badminton Tournament 2026", category: "Category A & B", winner: "[Winners]", runnerUp: "[Runners-up]" },
-    { tournament: "Home Badminton Tournament 2026", category: "Category C & D", winner: "[Winners]", runnerUp: "[Runners-up]" }
+  /* ---------- Tournaments and results (newest first) ----------
+     The first tournament is shown as "Latest results" on the home page.
+     For a new tournament, copy a whole { ... } block, paste it at the top, and edit it. */
+  tournaments: [
+    {
+      name: "Youth Badminton Tournament 2026",
+      date: "[Date]",
+      venue: "Central Club, Changanacherry",
+      categories: [
+        { event: "Under 13 Boys Singles",  winner: "Arunendra S.",  winnerPhoto: "images/tournaments/youth-2026/u13-boys-winner.jpg",
+          runnerUp: "Kailas D.",            runnerUpPhoto: "images/tournaments/youth-2026/u13-boys-runner-up.jpg" },
+        { event: "Under 13 Girls Singles", winner: "Ahana Krishna", winnerPhoto: "images/tournaments/youth-2026/girls-winner.jpg",
+          runnerUp: "Gouri Nandha Dhanesh", runnerUpPhoto: "" },
+        { event: "Under 17 Boys Singles",  winner: "Aiben Joseph",  winnerPhoto: "images/tournaments/youth-2026/u17-boys-winner.jpg",
+          runnerUp: "John Parambat Chako",  runnerUpPhoto: "images/tournaments/youth-2026/u17-boys-runner-up.jpg" },
+        { event: "Under 17 Girls Singles", winner: "Ahana Krishna", winnerPhoto: "images/tournaments/youth-2026/girls-winner.jpg",
+          runnerUp: "Helen Susan Jenu",     runnerUpPhoto: "images/tournaments/youth-2026/u17-girls-runner-up.jpg" }
+      ],
+      note: "Ahana Krishna won both the Under 13 and Under 17 girls' titles.",
+      groupPhoto: "images/tournaments/youth-2026/prize-distribution.jpg",
+      groupCaption: "Winners and runners-up with club members and coaches at the prize distribution."
+    },
+    {
+      name: "Home Badminton Tournament 2026",
+      date: "2026-11-01",
+      venue: "Central Club, Changanacherry",
+      categories: [
+        { event: "Category A & B", winner: "[Winners]", winnerPhoto: "", runnerUp: "[Runners-up]", runnerUpPhoto: "" },
+        { event: "Category C & D", winner: "[Winners]", winnerPhoto: "", runnerUp: "[Runners-up]", runnerUpPhoto: "" }
+      ]
+    }
   ],
 
   /* ---------- Gallery ----------
-     Upload photos to images/gallery/<album-folder>/ then list the paths, e.g.
-     photos: ["images/gallery/home-2026/final-1.jpg", "images/gallery/home-2026/final-2.jpg"] */
+     Upload photos to images/gallery/<album-folder>/ then list them here. */
   gallery: [
-    { album: "Home Badminton Tournament 2026", date: "Nov 2026", photos: [] },
-    { album: "[Club day]",                     date: "[Date]",   photos: [] }
+    { album: "Youth Badminton Tournament 2026", date: "[Date]", photos: [
+      "images/tournaments/youth-2026/prize-distribution.jpg",
+      "images/tournaments/youth-2026/u13-boys-winner.jpg",
+      "images/tournaments/youth-2026/girls-winner.jpg",
+      "images/tournaments/youth-2026/u17-boys-winner.jpg",
+      "images/tournaments/youth-2026/u17-boys-runner-up.jpg",
+      "images/tournaments/youth-2026/u17-girls-runner-up.jpg",
+      "images/tournaments/youth-2026/u13-boys-runner-up.jpg" ] },
+    { album: "The club", date: "", photos: [
+      "images/club/courts-overhead.jpg", "images/club/courts-play-1.jpg", "images/club/courts-play-2.jpg",
+      "images/club/clubhouse-front.jpg", "images/club/clubhouse-side.jpg", "images/club/covered-walkway.jpg",
+      "images/club/walkway-gym.jpg", "images/club/approach-road.jpg" ] }
   ],
 
   /* ---------- Videos ----------
-     Paste the YouTube video ID: the part after "watch?v=" in the link. */
+     Short clips: upload the .mp4 to videos/ and set file.
+     Longer videos: put them on YouTube and paste the video ID in youtubeId. */
   videos: [
-    { title: "[Finals highlights]", youtubeId: "" }
+    { title: "Arriving at Central Club",   file: "videos/arriving-at-the-club.mp4", poster: "images/club/arriving-at-the-club-poster.jpg" },
+    { title: "Walking into the courts",    file: "videos/walk-into-the-courts.mp4", poster: "images/club/walk-into-the-courts-poster.jpg" },
+    { title: "An evening on court",        file: "videos/hero-courts.mp4",          poster: "images/club/hero-poster.jpg" }
   ]
 };
