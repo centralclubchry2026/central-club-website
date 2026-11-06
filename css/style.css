@@ -600,3 +600,24 @@ dialog.lightbox button { margin-top: .5rem; }
 .swipe-hint { color: var(--muted); font-size: .9rem; font-weight: 600; }
 .voices-link { margin: 1.25rem 0 0; font-weight: 700; }
 .voices-link a::after { content: " \2192"; }
+
+/* ---------- Welcome intro (home page, first visit) ---------- */
+.intro-on body { overflow: hidden; }
+.intro { position: fixed; inset: 0; z-index: 999; }
+.intro-door { position: absolute; top: 0; bottom: 0; width: 50.5%; background: #0c3a2a; transition: transform 1.1s cubic-bezier(.7,0,.2,1); }
+.intro-door.left { left: 0; } .intro-door.right { right: 0; }
+.intro-stage { position: relative; z-index: 1; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.4rem; padding: 1rem; text-align: center; transition: opacity .45s ease; }
+.intro-court { position: absolute; inset: 0; width: 100%; height: 100%; fill: none; stroke: rgba(255,255,255,.22); stroke-width: 3; stroke-dasharray: 3000; stroke-dashoffset: 3000; animation: intro-draw 1.6s ease-out forwards; }
+.intro-court .net { stroke: rgba(244,196,48,.55); stroke-width: 5; stroke-dasharray: 8 12; stroke-dashoffset: 0; opacity: 0; animation: intro-fade .6s 1.1s forwards; }
+.intro-crest { position: relative; width: min(62vw, 22rem); opacity: 0; transform: scale(.92); animation: intro-crest 1s .7s cubic-bezier(.2,.8,.2,1) forwards; filter: drop-shadow(0 .8rem 2rem rgba(0,0,0,.45)); }
+.intro-line { position: relative; margin: 0; color: #f4c430; font: 700 clamp(.85rem, 2.4vw, 1.15rem) var(--body); letter-spacing: .32em; text-transform: uppercase; opacity: 0; animation: intro-fade .8s 1.6s forwards; }
+.intro-line span { color: #fff; }
+.intro-enter { position: relative; opacity: 0; animation: intro-fade .6s 2.1s forwards; font: 700 1rem var(--body); color: #3a2c00; background: #f4c430; border: 0; border-radius: 99px; padding: .85rem 1.8rem; cursor: pointer; letter-spacing: .04em; }
+.intro-enter:hover { background: #ffd54f; }
+.intro-enter:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+.intro.opening .intro-stage { opacity: 0; }
+.intro.opening .intro-door.left { transform: translateX(-100%); }
+.intro.opening .intro-door.right { transform: translateX(100%); }
+@keyframes intro-draw { to { stroke-dashoffset: 0; } }
+@keyframes intro-fade { to { opacity: 1; } }
+@keyframes intro-crest { to { opacity: 1; transform: scale(1); } }
