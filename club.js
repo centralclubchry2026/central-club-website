@@ -21,7 +21,7 @@ window.CLUB = {
   founded: "1992",
   tagline: "Badminton, table tennis, carroms and good company, right here in Changanacherry.",
   address: "Ruby Nagar, Changanacherry, Kerala [PIN]",
-  phone: "[+91 00000 00000]",
+  phone: "+91 98470 58009",
   email: "info@centralclubchry.com",
   mapsUrl: "https://maps.google.com/?q=Central+Club+Changanacherry",
 
@@ -32,9 +32,8 @@ window.CLUB = {
     { photo: "images/tournaments/home-2026/a-b-champions.jpg",          caption: "Category A & B champions Sohan & Sandeep celebrate",              position: "center 35%" },
     { photo: "images/tournaments/home-2026/a-b-finalists.jpg",          caption: "Category A & B winners and runners-up",           position: "center 30%" },
     { photo: "images/tournaments/home-2026/c-d-winners.jpg",            caption: "Category C & D winners Manu & Ciril",                          position: "center 38%" },
-    { photo: "images/tournaments/youth-2026/prize-distribution.jpg", caption: "Youth Tournament winners and runners-up", position: "center 62%" },
-    { photo: "images/tournaments/home-2026/best-player-award.jpg",      caption: "Best Player: Sojan Sajan",                        position: "center 40%" },
-    { photo: "images/tournaments/home-2026/special-mention-award.jpg",  caption: "Special mention, junior player: Savio Sojappan",  position: "center 40%" }
+    { photo: "images/tournaments/youth-2026/youth-winners-collage.jpg", caption: "Youth Tournament 2026 winners and runners-up", fit: "contain" },
+    { photo: "images/tournaments/home-2026/sibichen-award.jpg",       caption: "Siby Scaria Karimattom, the Home Tournament's oldest player",  position: "center 35%" },
   ],
 
   /* Single background photo, used only if heroSlides is empty. */
@@ -43,7 +42,17 @@ window.CLUB = {
   /* Home page video: short, muted, looping (used when heroImage is ""). */
   heroVideo: { file: "videos/hero-courts.mp4", poster: "images/club/hero-poster.jpg" },
 
-  /* Photos of the club, shown on the home page and in the gallery. */
+  /* Photos of the club, shown on the About page. */
+  clubPhotos: [
+    { photo: "images/club/courts-overhead.jpg",  caption: "Two indoor courts, seen from the gallery" },
+    { photo: "images/club/covered-walkway.jpg",  caption: "The covered walkway to the courts" },
+    { photo: "images/club/courts-play-1.jpg",    caption: "Evening games on court 2" },
+    { photo: "images/club/courts-play-2.jpg",    caption: "Doubles on court 1" },
+    { photo: "images/club/clubhouse-front.jpg",  caption: "Central Club at Ruby Nagar" },
+    { photo: "images/club/walkway-gym.jpg",      caption: "Gym equipment along the walkway" }
+  ],
+
+  /* (older list, kept for reference) */
   facilities: [
     { photo: "images/club/courts-overhead.jpg",  caption: "Two indoor courts, seen from the gallery" },
     { photo: "images/club/courts-play-1.jpg",    caption: "Evening games on court 2" },
@@ -81,7 +90,7 @@ window.CLUB = {
     { year: "1992", text: "Central Club formed by 17 shuttle badminton players in Changanacherry." },
     { year: "1994–95", text: "First office bearers on the club's honours board: Siby Scaria, President, and Mathew Kurian, Secretary." },
     { year: "2000", text: "Club office and indoor shuttle court at Ruby Nagar inaugurated on 27 December, with nearly 90 members." },
-    { year: "[Year]", text: "[Michael's School of Badminton starts regular coaching]" },
+    { year: "2010", text: "Michael's School of Badminton starts regular coaching at the club." },
     { year: "2026",   text: "Club website launched at centralclubchry.com." }
   ],
 
@@ -172,17 +181,37 @@ window.CLUB = {
   /* ---------- Coaching ---------- */
   coaching: {
     name: "Michael's School of Badminton",
-    intro: "Regular badminton coaching at Central Club for beginners and competitive players, from grip and footwork to match play.",
+    headline: "Badminton coaching at Central Club",
+    tagline: "Train with champions. Play like one.",
+    intro: "Central Club runs regular badminton coaching on its own two indoor courts at Ruby Nagar, through Michael's School of Badminton. Sessions cover everything from grip and footwork to match play, for complete beginners through to players competing at state and national level.",
+    homeIntro: "Regular coaching on Central Club's own indoor courts, from first lessons to competitive play. Run by Michael's School of Badminton, with batches for every age and level.",
+    admissions: "Admissions open · All ages · All levels",
+    phone: "+91 90611 37394",
+    forWhom: ["Boys & girls", "Men", "Women", "Seniors & masters", "Beginner to advanced", "Individual & group"],
     coaches: [
-      { name: "Michael Sebastian", role: "Chief Coach",     photo: "" },
-      { name: "Nithin",            role: "Assistant Coach", photo: "" }
+      { name: "Michael Sebastian", role: "Chief Coach", photo: "images/coaching/michael-sebastian.jpg",
+        credentials: ["BWF Certified Coach", "KBSA Certified Coach", "2× Silver Medallist for India, Masters", "National Masters Champion", "State Masters Champion"] },
+      { name: "Nithin", role: "Assistant Coach", photo: "images/coaching/nithin.jpg", credentials: [] }
+    ],
+    achievements: [
+      { photo: "images/coaching/achievement-india-korea-2023.jpg", caption: "For India, Korea 2023" },
+      { photo: "images/coaching/achievement-apmg-2023.jpg",        caption: "Medal ceremony, APMG 2023" },
+      { photo: "images/coaching/achievement-bwf-dubai-2016.jpg",   caption: "BWF Coaching Forum, Dubai 2016" }
+    ],
+    champions: [
+      { name: "Gowri Krishna T R", label: "India player", photo: "images/coaching/champion-gowri-krishna.jpg",
+        text: ["Runner-up, Women's Doubles, All India Senior Ranking 2025", "36th National Games, Gujarat 2022"] },
+      { name: "Varghese", label: "State player", photo: "images/coaching/champion-varghese.jpg",
+        text: ["Kerala State, Men's Singles", "Winners, SGFI National School Games"] },
+      { name: "Ahana Krishna", label: "State champion", photo: "images/coaching/champion-ahana-krishna.jpg",
+        text: ["Kerala State Under-13 Girls' Champion"] }
     ],
     batches: [
       { name: "Kids (beginners)", ages: "[Ages 7–12]",  days: "[Mon–Fri]",   time: "[5:00–6:00 PM]" },
       { name: "Juniors",          ages: "[Ages 12–17]", days: "[Mon–Fri]",   time: "[6:00–7:00 PM]" },
       { name: "Adults",           ages: "18+",          days: "[Sat & Sun]", time: "[6:30–8:00 AM]" }
     ],
-    enquiry: "Call [+91 00000 00000] or email info@centralclubchry.com to book a trial session."
+    enquiry: "Call +91 90611 37394 or email info@centralclubchry.com to book a trial session."
   },
 
   /* ---------- Activities ----------
@@ -228,7 +257,7 @@ window.CLUB = {
         { name: "Tenny Thomas & Mahesh",  result: "Runners-up",      event: "Category C & D doubles", group: "Category C & D", photo: "images/tournaments/home-2026/c-d-runners-up-card.jpg" },
         { name: "Sojan Sajan",            result: "Best Player",     event: "Home Tournament 2026",   group: "Special awards", photo: "images/tournaments/home-2026/best-player.jpg" },
         { name: "Savio Sojappan",         result: "Special mention", event: "Junior player",          group: "Special awards", photo: "images/tournaments/home-2026/special-mention.jpg" },
-        { name: "Sibichen",               result: "Oldest player",   event: "Home Tournament 2026",           group: "Special awards", photo: "images/tournaments/home-2026/sibichen.jpg" }
+        { name: "Siby Scaria Karimattom", result: "Oldest player",   event: "Home Tournament 2026",           group: "Special awards", photo: "images/tournaments/home-2026/sibichen.jpg" }
       ],
       groupPhoto: "images/tournaments/home-2026/all-winners.jpg",
       groupCaption: "Winners of the Home Tournament and the Youth Tournament together at the club."
