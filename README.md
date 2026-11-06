@@ -16,10 +16,11 @@ History on GitHub and compare with the previous version.
 |---|---|
 | Post an announcement | `news` (add the newest at the top) |
 | Show the LIVE banner | `live` → `active: true` and paste the YouTube link |
-| Add results | `results` |
+| Add a tournament and its results | `tournaments` (newest at the top; copy a whole block) |
 | Add a member | upload photo to `images/members/`, then add a line to `members` |
 | Add gallery photos | upload to `images/gallery/<album>/`, then list them in `gallery` |
-| Add a video | `videos` → paste the YouTube video ID |
+| Add a video | short clips: upload to `videos/` and set `file`; long ones: YouTube ID in `youtubeId` |
+| Change the home page photo | `heroImage` |
 
 ## Photos
 - Resize to about 1600 px wide before uploading (members: square, about 600 px).
