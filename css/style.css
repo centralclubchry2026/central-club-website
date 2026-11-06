@@ -438,3 +438,9 @@ dialog.lightbox button { margin-top: .5rem; }
   .hero-slideshow .hero-text .since { display: none; }
   .hero-slideshow .actions { margin-top: .5rem; }
 }
+
+/* A designed slide (like a collage) is shown whole, not cropped */
+.slide.is-contain { background: #0c3a2a; }
+.slide.is-contain img { object-fit: contain; }
+.slide.is-contain::after { background: linear-gradient(0deg, rgba(8,40,29,.9) 0%, rgba(8,40,29,0) 22%); }
+@media (min-width: 860px) { .slide.is-contain figcaption { display: none; } }

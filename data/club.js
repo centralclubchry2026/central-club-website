@@ -32,9 +32,8 @@ window.CLUB = {
     { photo: "images/tournaments/home-2026/a-b-champions.jpg",          caption: "Category A & B champions Sohan & Sandeep celebrate",              position: "center 35%" },
     { photo: "images/tournaments/home-2026/a-b-finalists.jpg",          caption: "Category A & B winners and runners-up",           position: "center 30%" },
     { photo: "images/tournaments/home-2026/c-d-winners.jpg",            caption: "Category C & D winners Manu & Ciril",                          position: "center 38%" },
-    { photo: "images/tournaments/youth-2026/prize-distribution.jpg", caption: "Youth Tournament winners and runners-up", position: "center 62%" },
-    { photo: "images/tournaments/home-2026/best-player-award.jpg",      caption: "Best Player: Sojan Sajan",                        position: "center 40%" },
-    { photo: "images/tournaments/home-2026/special-mention-award.jpg",  caption: "Special mention, junior player: Savio Sojappan",  position: "center 40%" }
+    { photo: "images/tournaments/youth-2026/youth-winners-collage.jpg", caption: "Youth Tournament 2026 winners and runners-up", fit: "contain" },
+    { photo: "images/tournaments/home-2026/sibichen-award.jpg",       caption: "Siby Scaria Karimattom, the Home Tournament's oldest player",  position: "center 35%" },
   ],
 
   /* Single background photo, used only if heroSlides is empty. */
@@ -228,7 +227,7 @@ window.CLUB = {
         { name: "Tenny Thomas & Mahesh",  result: "Runners-up",      event: "Category C & D doubles", group: "Category C & D", photo: "images/tournaments/home-2026/c-d-runners-up-card.jpg" },
         { name: "Sojan Sajan",            result: "Best Player",     event: "Home Tournament 2026",   group: "Special awards", photo: "images/tournaments/home-2026/best-player.jpg" },
         { name: "Savio Sojappan",         result: "Special mention", event: "Junior player",          group: "Special awards", photo: "images/tournaments/home-2026/special-mention.jpg" },
-        { name: "Sibichen",               result: "Oldest player",   event: "Home Tournament 2026",           group: "Special awards", photo: "images/tournaments/home-2026/sibichen.jpg" }
+        { name: "Siby Scaria Karimattom", result: "Oldest player",   event: "Home Tournament 2026",           group: "Special awards", photo: "images/tournaments/home-2026/sibichen.jpg" }
       ],
       groupPhoto: "images/tournaments/home-2026/all-winners.jpg",
       groupCaption: "Winners of the Home Tournament and the Youth Tournament together at the club."
