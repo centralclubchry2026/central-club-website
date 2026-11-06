@@ -180,8 +180,24 @@
           }).join("") + "</div>"
         : "") +
       (!compact || !pls.length ? (t.categories && t.categories.length ? '<h4 class="player-group">All results</h4>' + resultsTable(t.categories) : "") : "") +
+      (!compact && t.testimonialsLink ? '<p class="voices-link"><a href="' + safeUrl(t.testimonialsLink) + '">Watch players and parents talk about the tournament</a></p>' : "") +
       (!compact && t.groupPhoto ? '<figure class="group-photo"><img src="' + safeUrl(t.groupPhoto) + '" alt="' + esc(t.groupCaption || t.name) + '" loading="lazy"><figcaption>' + esc(t.groupCaption || "") + "</figcaption></figure>" : "") +
       "</div>";
+  }
+  function voices(list, strip) {
+    return '<div class="voices' + (strip ? " strip" : "") + '">' + list.map(function (v) {
+      return '<figure class="voice"><button type="button" class="voice-play" data-video="' + safeUrl(v.file) + '" aria-label="Play video">' +
+        '<img src="' + safeUrl(v.poster) + '" alt="" loading="lazy"><span class="play"></span></button></figure>';
+    }).join("") + "</div>";
+  }
+  function initVoices() {
+    document.addEventListener("click", function (e) {
+      var b = e.target.closest && e.target.closest(".voice-play"); if (!b) return;
+      var v = document.createElement("video");
+      v.src = b.getAttribute("data-video"); v.controls = true; v.autoplay = true; v.playsInline = true;
+      var poster = b.querySelector("img"); if (poster) v.poster = poster.src;
+      b.parentNode.replaceChild(v, b);
+    });
   }
   function heroSlideshow(slides) {
     return '<div class="slides" aria-roledescription="carousel" aria-label="Club highlights">' +
@@ -321,17 +337,16 @@
         '<a class="btn btn-court" href="mailto:' + esc(C.email) + '?subject=Badminton%20coaching%20enquiry">Email an enquiry</a></p></div>' +
         '<div><h3 class="for-head">Coaching for</h3><ul class="for-grid">' + (co.forWhom || []).map(function (f) { return "<li>" + esc(f) + "</li>"; }).join("") + "</ul></div></div></section>" +
 
-        (lead ? '<section class="section"><div class="wrap"><h2>The coaches</h2><div class="coach-lead">' +
+        (lead ? '<section class="section"><div class="wrap"><h2>The coach</h2><div class="coach-lead">' +
           '<div class="coach-photo">' + (lead.photo ? '<img src="' + safeUrl(lead.photo) + '" alt="' + esc(lead.name) + '" loading="lazy">' : "") + "</div>" +
           '<div class="coach-info"><p class="coach-role">' + esc(lead.role) + "</p><h3>" + esc(lead.name) + "</h3>" +
           ((lead.credentials || []).length ? '<ul class="creds">' + lead.credentials.map(function (c) { return "<li>" + esc(c) + "</li>"; }).join("") + "</ul>" : "") +
           ((co.achievements || []).length ? '<div class="achievements">' + co.achievements.map(function (a) {
             return '<figure><img src="' + safeUrl(a.photo) + '" alt="' + esc(a.caption) + '" loading="lazy"><figcaption>' + esc(a.caption) + "</figcaption></figure>";
           }).join("") + "</div>" : "") + "</div></div>" +
-          rest.map(function (c) {
-            return '<div class="coach-small">' + (c.photo ? '<img src="' + safeUrl(c.photo) + '" alt="' + esc(c.name) + '" loading="lazy">' : "") +
-              '<div><p class="coach-role">' + esc(c.role) + "</p><h3>" + esc(c.name) + "</h3></div></div>";
-          }).join("") + "</div></section>" : "") +
+          "</div></section>" : "") +
+        ((co.trainingPhotos || []).length ? '<section class="section"><div class="wrap"><h2>Training at Central Club</h2><p class="section-lead">Regular batches on the club\'s two indoor courts.</p><div class="photo-mosaic training">' +
+          co.trainingPhotos.map(function (f) { return '<figure><img src="' + safeUrl(f.photo) + '" alt="' + esc(f.caption) + '" loading="lazy"><figcaption>' + esc(f.caption) + "</figcaption></figure>"; }).join("") + "</div></div></section>" : "") +
 
         ((co.champions || []).length ? '<section class="section champions-section"><div class="wrap"><h2>Our champions</h2><p class="section-lead">Trained on Central Club\'s courts. Competing for Kerala and India.</p><div class="champions">' +
           co.champions.map(function (ch) {
@@ -339,6 +354,9 @@
               (ch.text || []).map(function (t) { return "<p>" + esc(t) + "</p>"; }).join("") + "</div></article>";
           }).join("") + "</div></div></section>" : "") +
 
+        ((co.testimonials || []).length ? '<section class="section" id="testimonials"><div class="wrap"><div class="section-top"><h2>What players and parents say</h2><span class="swipe-hint">Swipe or scroll for more</span></div><p class="section-lead">In their own words, at the club\'s youth tournament.</p>' + voices(co.testimonials, true) + "</div></section>" : "") +
+        ((co.competitionPhotos || []).length ? '<section class="section"><div class="wrap"><h2>Our players in competition</h2><p class="section-lead">From state ranking events to the National Games.</p><div class="photo-mosaic">' +
+          co.competitionPhotos.map(function (f) { return '<figure><img src="' + safeUrl(f.photo) + '" alt="' + esc(f.caption) + '" loading="lazy"><figcaption>' + esc(f.caption) + "</figcaption></figure>"; }).join("") + "</div></div></section>" : "") +
         '<section class="section"><div class="wrap"><h2>Batches and timings</h2><div class="batches">' +
         (co.batches || []).map(function (b) {
           return '<div class="batch"><h3>' + esc(b.name) + "</h3><dl><dt>Ages</dt><dd>" + esc(b.ages) + "</dd><dt>Days</dt><dd>" + esc(b.days) + "</dd><dt>Time</dt><dd>" + esc(b.time) + "</dd></dl></div>";
@@ -417,5 +435,6 @@
   header();
   (PAGES[page] || PAGES.home)();
   startSlideshow();
+  initVoices();
   footer();
 })();

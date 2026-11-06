@@ -206,6 +206,34 @@ window.CLUB = {
       { name: "Ahana Krishna", label: "State champion", photo: "images/coaching/champion-ahana-krishna.jpg",
         text: ["Kerala State Under-13 Girls' Champion"] }
     ],
+    /* Photos for the coaching page */
+    testimonials: [
+      { file: "videos/testimonials/t1.mp4", poster: "images/testimonials/t1.jpg" },
+      { file: "videos/testimonials/t2.mp4", poster: "images/testimonials/t2.jpg" },
+      { file: "videos/testimonials/t3.mp4", poster: "images/testimonials/t3.jpg" },
+      { file: "videos/testimonials/t4.mp4", poster: "images/testimonials/t4.jpg" },
+      { file: "videos/testimonials/t5.mp4", poster: "images/testimonials/t5.jpg" },
+      { file: "videos/testimonials/t6.mp4", poster: "images/testimonials/t6.jpg" },
+      { file: "videos/testimonials/t7.mp4", poster: "images/testimonials/t7.jpg" }
+    ],
+    trainingPhotos: [
+      { photo: "images/coaching/batch-michaels-school.jpg", caption: "A coaching batch in Michael's School of Badminton jerseys" },
+      { photo: "images/coaching/batch-training-group.jpg",  caption: "An evening training group with the coaches" },
+      { photo: "images/coaching/batch-juniors-1.jpg",       caption: "Junior players after a training session" },
+      { photo: "images/coaching/batch-trophies.jpg",        caption: "Players and coach with team trophies" },
+      { photo: "images/coaching/batch-big-group.jpg",       caption: "One of the club's largest coaching batches" }
+    ],
+    competitionPhotos: [
+      { photo: "images/coaching/play-national-games-2022.jpg",   caption: "Mixed doubles at the 36th National Games, Gujarat 2022" },
+      { photo: "images/coaching/play-mixed-doubles-india.jpg",   caption: "Mixed doubles in India colours" },
+      { photo: "images/coaching/play-girls-singles.jpg",         caption: "Girls' singles in action" },
+      { photo: "images/coaching/play-boys-singles.jpg",          caption: "Boys' singles in action" },
+      { photo: "images/coaching/win-ahana-trophies.jpg",         caption: "Ahana Krishna with her trophies" },
+      { photo: "images/coaching/win-state-sub-junior-2023.jpg",  caption: "Ahana Krishna, Kerala State Sub Junior Ranking Tournament 2023" },
+      { photo: "images/coaching/win-ssb-open-2023.jpg",          caption: "A junior trophy haul at an open tournament, 2023" },
+      { photo: "images/coaching/win-junior-pair.jpg",            caption: "Junior players with their trophies" },
+      { photo: "images/coaching/win-jbc-2018.jpg",               caption: "Runner-up, Junior Badminton Championship 2018" }
+    ],
     batches: [
       { name: "Kids (beginners)", ages: "[Ages 7–12]",  days: "[Mon–Fri]",   time: "[5:00–6:00 PM]" },
       { name: "Juniors",          ages: "[Ages 12–17]", days: "[Mon–Fri]",   time: "[6:00–7:00 PM]" },
@@ -283,6 +311,7 @@ window.CLUB = {
         { name: "Helen Susan Jenu",     result: "Runner-up", event: "Under 17 Girls",             group: "Girls", photo: "images/tournaments/youth-2026/u17-girls-runner-up.jpg" }
       ],
       note: "Double champion: Ahana Krishna won both the Under 13 and Under 17 girls' titles.",
+      testimonialsLink: "coaching.html#testimonials",
       groupPhoto: "images/tournaments/youth-2026/prize-distribution.jpg",
       groupCaption: "Winners and runners-up with club members and coaches at the prize distribution."
     }
@@ -313,6 +342,13 @@ window.CLUB = {
      Short clips: upload the .mp4 to videos/ and set file.
      Longer videos: put them on YouTube and paste the video ID in youtubeId. */
   videos: [
+    { title: "Youth Tournament 2026", file: "videos/testimonials/t1.mp4", poster: "images/testimonials/t1.jpg" },
+    { title: "Youth Tournament 2026", file: "videos/testimonials/t2.mp4", poster: "images/testimonials/t2.jpg" },
+    { title: "Youth Tournament 2026", file: "videos/testimonials/t3.mp4", poster: "images/testimonials/t3.jpg" },
+    { title: "Youth Tournament 2026", file: "videos/testimonials/t4.mp4", poster: "images/testimonials/t4.jpg" },
+    { title: "Youth Tournament 2026", file: "videos/testimonials/t5.mp4", poster: "images/testimonials/t5.jpg" },
+    { title: "Youth Tournament 2026", file: "videos/testimonials/t6.mp4", poster: "images/testimonials/t6.jpg" },
+    { title: "Youth Tournament 2026", file: "videos/testimonials/t7.mp4", poster: "images/testimonials/t7.jpg" },
     { title: "Arriving at Central Club",   file: "videos/arriving-at-the-club.mp4", poster: "images/club/arriving-at-the-club-poster.jpg" },
     { title: "Walking into the courts",    file: "videos/walk-into-the-courts.mp4", poster: "images/club/walk-into-the-courts-poster.jpg" },
     { title: "An evening on court",        file: "videos/hero-courts.mp4",          poster: "images/club/hero-poster.jpg" }
