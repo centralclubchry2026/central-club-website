@@ -180,7 +180,7 @@
   function heroSlideshow(slides) {
     return '<div class="slides" aria-roledescription="carousel" aria-label="Club highlights">' +
       slides.map(function (sl, i) {
-        return '<figure class="slide' + (i === 0 ? " is-active" : "") + '" aria-roledescription="slide" aria-label="' + (i + 1) + " of " + slides.length + '"' + (i ? ' aria-hidden="true"' : "") + ">" +
+        return '<figure class="slide' + (i === 0 ? " is-active" : "") + (sl.fit === "contain" ? " is-contain" : "") + '" aria-roledescription="slide" aria-label="' + (i + 1) + " of " + slides.length + '"' + (i ? ' aria-hidden="true"' : "") + ">" +
           '<img src="' + safeUrl(sl.photo) + '" alt="' + esc(sl.caption) + '"' + (i ? ' loading="lazy"' : "") + ' data-pos="' + esc(sl.position || "") + '">' +
           "<figcaption>" + esc(sl.caption) + "</figcaption></figure>";
       }).join("") +
