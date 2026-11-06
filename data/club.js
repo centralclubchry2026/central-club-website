@@ -25,7 +25,19 @@ window.CLUB = {
   email: "info@centralclubchry.com",
   mapsUrl: "https://maps.google.com/?q=Central+Club+Changanacherry",
 
-  /* Home page background photo: a wide, empty court looks best. Leave "" to use the video panel instead. */
+  /* Home page slideshow: photos change every few seconds, with arrows and dots.
+     position moves the photo inside the frame ("center 30%" shows more of the top). */
+  heroSlides: [
+    { photo: "images/tournaments/home-2026/all-winners.jpg",            caption: "This season's winners, all together",             position: "center 62%" },
+    { photo: "images/tournaments/home-2026/a-b-champions.jpg",          caption: "Category A & B champions Sohan & Sandeep celebrate",              position: "center 35%" },
+    { photo: "images/tournaments/home-2026/a-b-finalists.jpg",          caption: "Category A & B winners and runners-up",           position: "center 30%" },
+    { photo: "images/tournaments/home-2026/c-d-winners.jpg",            caption: "Category C & D winners Manu & Ciril",                          position: "center 38%" },
+    { photo: "images/tournaments/youth-2026/prize-distribution.jpg", caption: "Youth Tournament winners and runners-up", position: "center 62%" },
+    { photo: "images/tournaments/home-2026/best-player-award.jpg",      caption: "Best Player: Sojan Sajan",                        position: "center 40%" },
+    { photo: "images/tournaments/home-2026/special-mention-award.jpg",  caption: "Special mention, junior player: Savio Sojappan",  position: "center 40%" }
+  ],
+
+  /* Single background photo, used only if heroSlides is empty. */
   heroImage: "images/club/hero-court.jpg",
 
   /* Home page video: short, muted, looping (used when heroImage is ""). */
@@ -185,6 +197,7 @@ window.CLUB = {
 
   /* ---------- News & updates (newest first, date as YYYY-MM-DD) ---------- */
   news: [
+    { date: "2026-11-01", title: "Youth Tournament 2026: Ahana Krishna takes both girls' titles", text: "Under 13 and Under 17 boys and girls played on 31 October and 1 November. Ahana Krishna won both girls' titles, Arunendra S. took the Under 13 boys' title and Aiben Joseph the Under 17 boys'. Full results are on the News page.", link: "" },
     { date: "2026-11-01", title: "Home Badminton Tournament 2026: finals played", text: "After a week of league matches from 25 October, the semi-finals and finals of both tournaments (Category A & B, Category C & D) were played on 1 November. Results are on the News page.", link: "" },
     { date: "2026-10-20", title: "League fixtures announced", text: "Pool league matches run from 25 to 31 October, 7 PM onwards on two courts.", link: "" },
     { date: "2026-10-01", title: "[Sample update]", text: "[Use this space for notices: holidays, court maintenance, meetings, new members.]", link: "" }
@@ -192,7 +205,6 @@ window.CLUB = {
 
   /* ---------- Upcoming events ---------- */
   events: [
-    { date: "[Dec 2026]", title: "[Youth tournament (U13 / U17)]", place: "Central Club courts" },
     { date: "[Jan 2027]", title: "[Annual general body meeting]",   place: "Club hall" }
   ],
 
@@ -201,38 +213,60 @@ window.CLUB = {
      For a new tournament, copy a whole { ... } block, paste it at the top, and edit it. */
   tournaments: [
     {
-      name: "Youth Badminton Tournament 2026",
-      date: "[Date]",
-      venue: "Central Club, Changanacherry",
-      categories: [
-        { event: "Under 13 Boys Singles",  winner: "Arunendra S.",  winnerPhoto: "images/tournaments/youth-2026/u13-boys-winner.jpg",
-          runnerUp: "Kailas D.",            runnerUpPhoto: "images/tournaments/youth-2026/u13-boys-runner-up.jpg" },
-        { event: "Under 13 Girls Singles", winner: "Ahana Krishna", winnerPhoto: "images/tournaments/youth-2026/girls-winner.jpg",
-          runnerUp: "Gouri Nandha Dhanesh", runnerUpPhoto: "" },
-        { event: "Under 17 Boys Singles",  winner: "Aiben Joseph",  winnerPhoto: "images/tournaments/youth-2026/u17-boys-winner.jpg",
-          runnerUp: "John Parambat Chako",  runnerUpPhoto: "images/tournaments/youth-2026/u17-boys-runner-up.jpg" },
-        { event: "Under 17 Girls Singles", winner: "Ahana Krishna", winnerPhoto: "images/tournaments/youth-2026/girls-winner.jpg",
-          runnerUp: "Helen Susan Jenu",     runnerUpPhoto: "images/tournaments/youth-2026/u17-girls-runner-up.jpg" }
-      ],
-      note: "Ahana Krishna won both the Under 13 and Under 17 girls' titles.",
-      groupPhoto: "images/tournaments/youth-2026/prize-distribution.jpg",
-      groupCaption: "Winners and runners-up with club members and coaches at the prize distribution."
-    },
-    {
       name: "Home Badminton Tournament 2026",
       date: "2026-11-01",
       venue: "Central Club, Changanacherry",
+      note: "Two doubles tournaments, Category A & B and Category C & D, with a week of league matches and finals on 1 November.",
       categories: [
-        { event: "Category A & B", winner: "[Winners]", winnerPhoto: "", runnerUp: "[Runners-up]", runnerUpPhoto: "" },
-        { event: "Category C & D", winner: "[Winners]", winnerPhoto: "", runnerUp: "[Runners-up]", runnerUpPhoto: "" }
-      ]
+        { event: "Category A & B doubles", winner: "Sohan & Sandeep", runnerUp: "Aswin & Suresh Philip" },
+        { event: "Category C & D doubles", winner: "Manu & Ciril", runnerUp: "Tenny Thomas & Mahesh" }
+      ],
+      players: [
+        { name: "Sohan & Sandeep",        result: "Winners",         event: "Category A & B doubles", group: "Category A & B", photo: "images/tournaments/home-2026/a-b-winners-card.jpg" },
+        { name: "Aswin & Suresh Philip",  result: "Runners-up",      event: "Category A & B doubles", group: "Category A & B", photo: "images/tournaments/home-2026/a-b-runners-up.jpg" },
+        { name: "Manu & Ciril",           result: "Winners",         event: "Category C & D doubles", group: "Category C & D", photo: "images/tournaments/home-2026/c-d-winners-card.jpg" },
+        { name: "Tenny Thomas & Mahesh",  result: "Runners-up",      event: "Category C & D doubles", group: "Category C & D", photo: "images/tournaments/home-2026/c-d-runners-up-card.jpg" },
+        { name: "Sojan Sajan",            result: "Best Player",     event: "Home Tournament 2026",   group: "Special awards", photo: "images/tournaments/home-2026/best-player.jpg" },
+        { name: "Savio Sojappan",         result: "Special mention", event: "Junior player",          group: "Special awards", photo: "images/tournaments/home-2026/special-mention.jpg" },
+        { name: "Sibichen",               result: "Oldest player",   event: "Home Tournament 2026",           group: "Special awards", photo: "images/tournaments/home-2026/sibichen.jpg" }
+      ],
+      groupPhoto: "images/tournaments/home-2026/all-winners.jpg",
+      groupCaption: "Winners of the Home Tournament and the Youth Tournament together at the club."
+    },
+    {
+      name: "Youth Badminton Tournament 2026",
+      date: "31 October – 1 November 2026",
+      venue: "Central Club, Changanacherry",
+      categories: [
+        { event: "Under 13 Boys Singles",  winner: "Arunendra S.",  runnerUp: "Kailas D." },
+        { event: "Under 13 Girls Singles", winner: "Ahana Krishna", runnerUp: "Gouri Nandha Dhanesh" },
+        { event: "Under 17 Boys Singles",  winner: "Aiben Joseph",  runnerUp: "John Parampathu Chacko" },
+        { event: "Under 17 Girls Singles", winner: "Ahana Krishna", runnerUp: "Helen Susan Jenu" }
+      ],
+      /* Photo cards: one per player. result is "Winner" or "Runner-up". */
+      players: [
+        { name: "Arunendra S.",         result: "Winner",    event: "Under 13 Boys",              group: "Boys",  photo: "images/tournaments/youth-2026/u13-boys-winner.jpg" },
+        { name: "Kailas D.",            result: "Runner-up", event: "Under 13 Boys",              group: "Boys",  photo: "images/tournaments/youth-2026/u13-boys-runner-up.jpg" },
+        { name: "Aiben Joseph",         result: "Winner",    event: "Under 17 Boys",              group: "Boys",  photo: "images/tournaments/youth-2026/u17-boys-winner.jpg" },
+        { name: "John Parampathu Chacko",  result: "Runner-up", event: "Under 17 Boys",              group: "Boys",  photo: "images/tournaments/youth-2026/u17-boys-runner-up.jpg" },
+        { name: "Ahana Krishna",        result: "Winner",    event: "Under 13 & Under 17 Girls",  group: "Girls", photo: "images/tournaments/youth-2026/girls-winner.jpg" },
+        { name: "Gouri Nandha Dhanesh", result: "Runner-up", event: "Under 13 Girls",             group: "Girls", photo: "images/tournaments/youth-2026/u13-girls-runner-up.jpg" },
+        { name: "Helen Susan Jenu",     result: "Runner-up", event: "Under 17 Girls",             group: "Girls", photo: "images/tournaments/youth-2026/u17-girls-runner-up.jpg" }
+      ],
+      note: "Double champion: Ahana Krishna won both the Under 13 and Under 17 girls' titles.",
+      groupPhoto: "images/tournaments/youth-2026/prize-distribution.jpg",
+      groupCaption: "Winners and runners-up with club members and coaches at the prize distribution."
     }
   ],
 
   /* ---------- Gallery ----------
      Upload photos to images/gallery/<album-folder>/ then list them here. */
   gallery: [
-    { album: "Youth Badminton Tournament 2026", date: "[Date]", photos: [
+    { album: "Home Badminton Tournament 2026", date: "2026-11-01", photos: [
+      "images/tournaments/home-2026/all-winners.jpg", "images/tournaments/home-2026/a-b-champions.jpg", "images/tournaments/home-2026/a-b-finalists.jpg", "images/tournaments/home-2026/a-b-winners.jpg",
+      "images/tournaments/home-2026/c-d-winners.jpg", "images/tournaments/home-2026/c-d-runners-up.jpg", "images/tournaments/home-2026/best-player-award.jpg",
+      "images/tournaments/home-2026/special-mention-award.jpg", "images/tournaments/home-2026/sibichen-award.jpg" ] },
+    { album: "Youth Badminton Tournament 2026", date: "31 Oct – 1 Nov 2026", photos: [
       "images/tournaments/youth-2026/prize-distribution.jpg",
       "images/tournaments/youth-2026/u13-boys-winner.jpg",
       "images/tournaments/youth-2026/girls-winner.jpg",

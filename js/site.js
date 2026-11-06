@@ -147,24 +147,70 @@
   }
 
   /* Tournament results */
-  function resultCard(c) {
-    return '<article class="result"><h4>' + esc(c.event) + "</h4>" +
-      '<div class="result-photo">' + (c.winnerPhoto
-        ? '<img src="' + safeUrl(c.winnerPhoto) + '" alt="' + esc(c.winner) + ", " + esc(c.event) + ' winner" loading="lazy">'
-        : '<span aria-hidden="true">' + initials(c.winner) + "</span>") +
-      '<span class="badge">Winner</span></div>' +
-      '<p class="result-winner">' + esc(c.winner) + "</p>" +
-      (c.runnerUp ? '<p class="result-runner">' + (c.runnerUpPhoto ? '<img src="' + safeUrl(c.runnerUpPhoto) + '" alt="" loading="lazy">' : '<span class="mini" aria-hidden="true">' + initials(c.runnerUp) + "</span>") +
-        "<span><small>Runner-up</small>" + esc(c.runnerUp) + "</span></p>" : "") +
-      "</article>";
+  function playerCard(pl) {
+    var win = /^(winner|best)/i.test(pl.result || "");
+    return '<article class="player' + (win ? " is-winner" : "") + '">' +
+      '<div class="player-photo">' + (pl.photo
+        ? '<img src="' + safeUrl(pl.photo) + '" alt="' + esc(pl.name) + '" loading="lazy">'
+        : '<span aria-hidden="true">' + initials(pl.name) + "</span>") +
+      '<span class="badge">' + esc(pl.result) + "</span></div>" +
+      '<div class="player-text"><p class="player-name">' + esc(pl.name) + '</p><p class="player-event">' + esc(pl.event) + "</p></div></article>";
+  }
+  function resultsTable(cats) {
+    return '<div class="table-wrap"><table class="results-table"><thead><tr><th>Category</th><th>Winner</th><th>Runner-up</th></tr></thead><tbody>' +
+      cats.map(function (c) { return "<tr><td>" + esc(c.event) + "</td><td>" + esc(c.winner) + "</td><td>" + esc(c.runnerUp) + "</td></tr>"; }).join("") +
+      "</tbody></table></div>";
   }
   function tournamentBlock(t, compact) {
+    var pls = t.players || [], groups = [];
+    pls.forEach(function (pl) { var g = pl.group || ""; if (groups.indexOf(g) === -1) groups.push(g); });
     return '<div class="tournament">' +
       '<div class="tournament-head"><h3>' + esc(t.name) + "</h3><p>" + fmtDate(t.date) + (t.venue ? " · " + esc(t.venue) : "") + "</p></div>" +
-      '<div class="results-grid">' + (t.categories || []).map(resultCard).join("") + "</div>" +
       (t.note ? '<p class="tournament-note">' + esc(t.note) + "</p>" : "") +
+      (pls.length
+        ? groups.map(function (g) {
+            return (g ? '<h4 class="player-group">' + esc(g) + "</h4>" : "") + '<div class="players">' +
+              pls.filter(function (pl) { return (pl.group || "") === g; }).map(playerCard).join("") + "</div>";
+          }).join("")
+        : "") +
+      (!compact || !pls.length ? (t.categories && t.categories.length ? '<h4 class="player-group">All results</h4>' + resultsTable(t.categories) : "") : "") +
       (!compact && t.groupPhoto ? '<figure class="group-photo"><img src="' + safeUrl(t.groupPhoto) + '" alt="' + esc(t.groupCaption || t.name) + '" loading="lazy"><figcaption>' + esc(t.groupCaption || "") + "</figcaption></figure>" : "") +
       "</div>";
+  }
+  function heroSlideshow(slides) {
+    return '<div class="slides" aria-roledescription="carousel" aria-label="Club highlights">' +
+      slides.map(function (sl, i) {
+        return '<figure class="slide' + (i === 0 ? " is-active" : "") + '" aria-roledescription="slide" aria-label="' + (i + 1) + " of " + slides.length + '"' + (i ? ' aria-hidden="true"' : "") + ">" +
+          '<img src="' + safeUrl(sl.photo) + '" alt="' + esc(sl.caption) + '"' + (i ? ' loading="lazy"' : "") + ' data-pos="' + esc(sl.position || "") + '">' +
+          "<figcaption>" + esc(sl.caption) + "</figcaption></figure>";
+      }).join("") +
+      '<button type="button" class="slide-nav prev" aria-label="Previous photo">&#8249;</button>' +
+      '<button type="button" class="slide-nav next" aria-label="Next photo">&#8250;</button>' +
+      '<div class="slide-dots">' + slides.map(function (sl, i) {
+        return '<button type="button" aria-label="Show photo ' + (i + 1) + '"' + (i === 0 ? ' aria-current="true"' : "") + "></button>";
+      }).join("") + "</div></div>";
+  }
+  function startSlideshow() {
+    var root = document.querySelector(".slides"); if (!root) return;
+    var slides = root.querySelectorAll(".slide"), dots = root.querySelectorAll(".slide-dots button"), cur = 0, timer = null;
+    root.querySelectorAll("img[data-pos]").forEach(function (im) { var p = im.getAttribute("data-pos"); if (p) im.style.objectPosition = p; });
+    function show(n) {
+      cur = (n + slides.length) % slides.length;
+      slides.forEach(function (s, i) { s.classList.toggle("is-active", i === cur); if (i === cur) s.removeAttribute("aria-hidden"); else s.setAttribute("aria-hidden", "true"); });
+      dots.forEach(function (d, i) { if (i === cur) d.setAttribute("aria-current", "true"); else d.removeAttribute("aria-current"); });
+    }
+    var still = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    function play() { if (!still && !timer) timer = setInterval(function () { show(cur + 1); }, 6000); }
+    function stop() { clearInterval(timer); timer = null; }
+    root.querySelector(".prev").addEventListener("click", function () { stop(); show(cur - 1); play(); });
+    root.querySelector(".next").addEventListener("click", function () { stop(); show(cur + 1); play(); });
+    dots.forEach(function (d, i) { d.addEventListener("click", function () { stop(); show(i); play(); }); });
+    root.addEventListener("mouseenter", stop); root.addEventListener("mouseleave", play);
+    root.addEventListener("focusin", stop); root.addEventListener("focusout", play);
+    var x0 = null;
+    root.addEventListener("touchstart", function (e) { x0 = e.touches[0].clientX; }, { passive: true });
+    root.addEventListener("touchend", function (e) { if (x0 === null) return; var dx = e.changedTouches[0].clientX - x0; if (Math.abs(dx) > 40) { stop(); show(cur + (dx < 0 ? 1 : -1)); play(); } x0 = null; });
+    play();
   }
   function heroMedia() {
     var v = C.heroVideo || {};
@@ -180,15 +226,16 @@
     home: function () {
       var co = C.coaching || {}, latest = (C.tournaments || [])[0], fac = C.facilities || [];
       main().innerHTML =
-        (C.heroImage ? '<section class="hero hero-photo"><img class="hero-bg" src="' + safeUrl(C.heroImage) + '" alt="">' : '<section class="hero">') + COURT + '<div class="wrap hero-grid"><div class="hero-text">' +
+        ((C.heroSlides || []).length ? '<section class="hero hero-slideshow">' + heroSlideshow(C.heroSlides) + '<div class="wrap hero-grid"><div class="hero-text">' :
+        (C.heroImage ? '<section class="hero hero-photo"><img class="hero-bg" src="' + safeUrl(C.heroImage) + '" alt="">' : '<section class="hero">') + COURT + '<div class="wrap hero-grid"><div class="hero-text">') +
         "<h1>" + esc(C.name) + '<span class="town">' + esc(C.town) + "</span></h1>" +
         "<p>" + esc(C.tagline) + "</p>" +
         '<p class="since">Est. ' + esc(C.founded) + "</p>" +
         '<div class="actions"><a class="btn btn-flood" href="coaching.html">Join badminton coaching</a>' +
-        '<a class="btn btn-line" href="news.html#results">Latest results</a></div></div>' + (C.heroImage ? "" : heroMedia()) + "</div></section>" +
+        '<a class="btn btn-line" href="news.html#results">Latest results</a></div></div>' + ((C.heroSlides || []).length || C.heroImage ? "" : heroMedia()) + "</div></section>" +
 
         (latest ? '<section class="section"><div class="wrap"><div class="section-top"><h2>Latest results</h2><a href="news.html#results">All results</a></div>' +
-          tournamentBlock(latest, true) + "</div></section>" : "") +
+          (C.tournaments || []).slice(0, 2).map(function (t) { return tournamentBlock(t, true); }).join("") + "</div></section>" : "") +
 
         '<section class="section"><div class="wrap"><h2>What we play</h2>' +
         activityList(C.activities, true) + '<p class="actions"><a href="activities.html">More about club activities</a></p></div></section>' +
@@ -354,5 +401,6 @@
 
   header();
   (PAGES[page] || PAGES.home)();
+  startSlideshow();
   footer();
 })();
