@@ -42,7 +42,17 @@ window.CLUB = {
   /* Home page video: short, muted, looping (used when heroImage is ""). */
   heroVideo: { file: "videos/hero-courts.mp4", poster: "images/club/hero-poster.jpg" },
 
-  /* Photos of the club, shown on the home page and in the gallery. */
+  /* Photos of the club, shown on the About page. */
+  clubPhotos: [
+    { photo: "images/club/courts-overhead.jpg",  caption: "Two indoor courts, seen from the gallery" },
+    { photo: "images/club/covered-walkway.jpg",  caption: "The covered walkway to the courts" },
+    { photo: "images/club/courts-play-1.jpg",    caption: "Evening games on court 2" },
+    { photo: "images/club/courts-play-2.jpg",    caption: "Doubles on court 1" },
+    { photo: "images/club/clubhouse-front.jpg",  caption: "Central Club at Ruby Nagar" },
+    { photo: "images/club/walkway-gym.jpg",      caption: "Gym equipment along the walkway" }
+  ],
+
+  /* (older list, kept for reference) */
   facilities: [
     { photo: "images/club/courts-overhead.jpg",  caption: "Two indoor courts, seen from the gallery" },
     { photo: "images/club/courts-play-1.jpg",    caption: "Evening games on court 2" },
@@ -80,7 +90,7 @@ window.CLUB = {
     { year: "1992", text: "Central Club formed by 17 shuttle badminton players in Changanacherry." },
     { year: "1994–95", text: "First office bearers on the club's honours board: Siby Scaria, President, and Mathew Kurian, Secretary." },
     { year: "2000", text: "Club office and indoor shuttle court at Ruby Nagar inaugurated on 27 December, with nearly 90 members." },
-    { year: "[Year]", text: "[Michael's School of Badminton starts regular coaching]" },
+    { year: "2010", text: "Michael's School of Badminton starts regular coaching at the club." },
     { year: "2026",   text: "Club website launched at centralclubchry.com." }
   ],
 
