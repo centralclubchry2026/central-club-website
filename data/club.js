@@ -21,7 +21,7 @@ window.CLUB = {
   founded: "1992",
   tagline: "Badminton, table tennis, carroms and good company, right here in Changanacherry.",
   address: "Ruby Nagar, Changanacherry, Kerala [PIN]",
-  phone: "+91 90611 37394",
+  phone: "+91 98470 58009",
   email: "info@centralclubchry.com",
   mapsUrl: "https://maps.google.com/?q=Central+Club+Changanacherry",
 
