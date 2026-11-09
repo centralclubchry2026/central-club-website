@@ -77,6 +77,11 @@ window.CLUB = {
     scoresUrl: ""   // optional: link to the live score app
   },
 
+  /* About page */
+  aboutHero: { photo: "images/club/clubhouse-hero.jpg", kicker: "About Central Club", line1: "Seventeen friends.", line2: "One club." },
+  storyText: "Central Club began with seventeen shuttle badminton players who wanted Changanacherry to have a proper place to play, so they built one themselves: their own office and indoor courts at Ruby Nagar, welcomed by the town as a gift to every sports lover. That spirit has never left. It lives on in the champions raised on our courts, the coaching that fills the hall every evening, the tournaments that mark the calendar, and the friendships that keep members coming back.",
+  aboutNumbers: [ ["17", "friends who built it"], ["2", "indoor courts of our own"], ["34", "years of sport"], ["1", "club, still playing"] ],
+
   /* Questions shown at the end of the About page */
   faq: [
     { q: "Is Central Club the same as The Changanacherry Club?",
@@ -102,26 +107,26 @@ window.CLUB = {
     { year: "2026",   text: "Club website launched at centralclubchry.com." }
   ],
 
-  /* The 17 founder members, as on the club's founders' plaque.
-     Photos are from the Malayala Manorama feature of 27 December 2000. */
+  /* The 17 founder members, in display order. Founders with a photo appear as large cards;
+     the rest are listed below them until a photo is added. */
   founders: [
-    { name: "Anil Mathew",           note: "Vaniapurackal",       photo: "images/founders/anil-mathew.jpg" },
-    { name: "Babu Joseph",           note: "Kallukulam",          photo: "images/founders/babu-joseph.jpg" },
-    { name: "Bobby Abraham",         note: "Manamel",             photo: "images/founders/bobby-abraham.jpg" },
-    { name: "Georgekutty M. G.",     note: "Marattukulam",        photo: "" },
-    { name: "Gigi Francis",          note: "Pulickal",            photo: "images/founders/gigi-francis.jpg" },
-    { name: "Gigi James",            note: "Koduppanapolackal",   photo: "images/founders/gigi-james.jpg" },
-    { name: "Gigen Thomas",          note: "Koippallil",          photo: "images/founders/gigen-thomas.jpg" },
-    { name: "Jojo James",            note: "Koduppanapolackal",   photo: "images/founders/jojo-james.jpg" },
-    { name: "P. F. Joseph",          note: "Pulickal",            photo: "images/founders/pf-joseph.jpg" },
-    { name: "T. A. Kannan",          note: "Thirumalathazhchayil", photo: "images/founders/ta-kannan.jpg" },
-    { name: "Mathew Kurian",         note: "Pottamkulam",         photo: "images/founders/mathew-kurian.jpg" },
-    { name: "S. R. Nambi",           note: "Selvi Nivas",         photo: "images/founders/sr-nambi.jpg", role: "Patron" },
-    { name: "Renjith Mathews",       note: "Karingada",           photo: "images/founders/renjith-mathews.jpg" },
-    { name: "T. A. Reghu",           note: "Thirumalathazhchayil", photo: "images/founders/ta-reghu.jpg" },
-    { name: "Santhosh Thomas",       note: "Perumpuzhakadavil",   photo: "images/founders/santhosh-thomas.jpg" },
-    { name: "Satheesh Valiyaveedan", note: "",                    photo: "images/founders/satheesh-valiyaveedan.jpg" },
-    { name: "Siby Scaria",           note: "Karimattom",          photo: "images/founders/siby-scaria.jpg" }
+    { name: "Anil Mathew Vaniapurackal", photo: "images/people/anil-mathew.jpg", highlight: "Four-time President" },
+    { name: "Siby Scaria Karimattom", photo: "images/people/siby-scaria.jpg", highlight: "The club’s first President and one of its finest badminton players" },
+    { name: "Gigi James Koduppunapolackal", photo: "images/people/gigi-james.jpg", highlight: "Former MG University and Kerala badminton player" },
+    { name: "Jojo James Koduppunapolackal", photo: "images/people/jojo-james.jpg", highlight: "Badminton, cricket and table tennis player" },
+    { name: "Santhosh Thomas Perumpuzhakadavil", photo: "images/people/santhosh-thomas.jpg", highlight: "Badminton and table tennis player" },
+    { name: "Babu Joseph Kallukalam", photo: "images/people/babu-joseph.jpg", highlight: "President 1999–2000" },
+    { name: "Gijan Thomas Koipally", photo: "images/people/gigen-thomas.jpg", highlight: "" },
+    { name: "Gigi Francis Pulickal", photo: "images/people/gigi-francis.jpg", highlight: "Former university and state player" },
+    { name: "Sathish Valiaveedan", photo: "images/people/satheesh-valiyaveedan.jpg", highlight: "President when the indoor court opened" },
+    { name: "Kannan T. A. Thirumalathazhchayil", photo: "images/people/ta-kannan.jpg", highlight: "Vice President in 2000" },
+    { name: "Boby Abraham Manamel", photo: "images/people/bobby-abraham.jpg", highlight: "" },
+    { name: "Mathew Kurian", note: "Pottamkulam", photo: "", highlight: "The club’s first Secretary" },
+    { name: "Renjith Mathews", note: "Karingada", photo: "", highlight: "President 2002–03" },
+    { name: "S. R. Nambi", note: "Selvi Nivas", photo: "", highlight: "Patron" },
+    { name: "Georgekutty M. G.", note: "Marattukulam", photo: "", highlight: "Treasurer in 2000" },
+    { name: "P. F. Joseph", note: "Pulickal", photo: "", highlight: "" },
+    { name: "T. A. Reghu", note: "Thirumalathazhchayil", photo: "", highlight: "" }
   ],
 
   /* Presidents and secretaries, from the club's honours board. Add new years at the bottom. */
@@ -170,10 +175,11 @@ window.CLUB = {
   ],
 
   committee: [
-    { name: "[Name]", role: "President", photo: "" },
-    { name: "[Name]", role: "Secretary", photo: "" },
-    { name: "[Name]", role: "Treasurer", photo: "" },
-    { name: "[Name]", role: "Manager",   photo: "" }
+    { name: "Rony",          role: "President",        photo: "images/people/rony.jpg" },
+    { name: "Biju",          role: "Vice President",   photo: "images/people/biju.jpg" },
+    { name: "Shoji James",   role: "Joint Secretary",  photo: "images/people/shoji-james.jpg" },
+    { name: "Martin Joseph", role: "Executive member", photo: "images/people/martin-joseph.jpg" },
+    { name: "Kishore",       role: "Executive member", photo: "images/people/kishore.jpg" }
   ],
 
   /* ---------- Members ----------

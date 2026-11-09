@@ -269,37 +269,47 @@
     },
 
     about: function () {
-      var ob = C.officeBearers || [], fac = C.clubPhotos || C.facilities || [], cm = (C.committee || []).filter(function (p) { return p.name && p.name.indexOf("[") !== 0; });
-      main().innerHTML = pageHead("About the club", "Est. " + C.founded + " in " + C.town) +
+      var hero = C.aboutHero || {}, ob = C.officeBearers || [], fac = C.clubPhotos || [];
+      var fs = C.founders || [], withPhoto = fs.filter(function (f) { return f.photo; }), noPhoto = fs.filter(function (f) { return !f.photo; });
+      main().innerHTML =
+        '<section class="ab-hero">' + (hero.photo ? '<img class="ab-hero-img" src="' + safeUrl(hero.photo) + '" alt="Central Club at Ruby Nagar, Changanacherry">' : "") +
+        '<div class="ab-panel">' + COURT + '<div class="ab-panel-in"><p class="ab-kicker">' + esc(hero.kicker || "About Central Club") + "</p>" +
+        "<h1>" + esc(hero.line1 || "") + "<span>" + esc(hero.line2 || "") + "</span></h1></div></div></section>" +
 
-        '<section class="section"><div class="wrap story"><div class="story-text"><h2>Our story</h2>' +
-        (C.history || []).map(function (p, i) { return "<p" + (i === 0 ? ' class="lede"' : "") + ">" + esc(p) + "</p>"; }).join("") + "</div>" +
-        (fac.length ? '<div class="story-photos">' + fac.slice(0, 2).map(function (f) { return '<figure><img src="' + safeUrl(f.photo) + '" alt="' + esc(f.caption) + '" loading="lazy"><figcaption>' + esc(f.caption) + "</figcaption></figure>"; }).join("") + "</div>" : "") +
-        "</div></section>" +
+        (C.storyText ? '<section class="ab-story"><div class="wrap"><div class="ab-orn"><span></span><i>Our story</i><span></span></div>' +
+          "<p>" + esc(C.storyText) + '</p><div class="ab-orn"><span></span><b aria-hidden="true">&#9670;</b><span></span></div></div></section>' : "") +
+
+        ((C.aboutNumbers || []).length ? '<section class="ab-numbers-wrap"><div class="wrap"><div class="ab-numbers">' + COURT +
+          C.aboutNumbers.map(function (n) { return '<div class="ab-num"><b>' + esc(n[0]) + "</b><span>" + esc(n[1]) + "</span></div>"; }).join("") + "</div></div></section>" : "") +
+
+        '<section class="section ab-founders" id="founders"><div class="wrap"><h2 class="ab-h2">Our founders</h2><p class="ab-sub">The seventeen friends who built Central Club.</p>' +
+        '<div class="ab-fgrid">' + withPhoto.map(function (f) {
+          return '<article class="ab-fcard"><img src="' + safeUrl(f.photo) + '" alt="' + esc(f.name) + '" loading="lazy"><div><span class="ab-badge">Founder member</span><h3>' + esc(f.name) + "</h3>" +
+            (f.highlight ? "<p>" + esc(f.highlight) + "</p>" : "") + "</div></article>";
+        }).join("") + "</div>" +
+        (noPhoto.length ? '<div class="ab-also"><h3>Also among our founders</h3><div class="ab-names">' + noPhoto.map(function (f) {
+          return '<div class="ab-name"><i aria-hidden="true">' + initials(f.name) + "</i><div><b>" + esc(f.name) + "</b><small>" + esc(f.highlight || f.note || "") + "</small></div></div>";
+        }).join("") + "</div></div>" : "") + "</div></section>" +
+
+        ((C.committee || []).length ? '<section class="ab-committee"><div class="wrap"><h2 class="ab-h2">Committee 2026–27</h2><p class="ab-sub">Leading the club today</p><div class="ab-crow">' +
+          C.committee.map(function (c) {
+            return '<article class="ab-ccard">' + (c.photo ? '<img src="' + safeUrl(c.photo) + '" alt="' + esc(c.name) + '" loading="lazy">' : '<span class="ab-cini">' + initials(c.name) + "</span>") +
+              '<div><span class="ab-badge">' + esc(c.role) + "</span><h3>" + esc(c.name) + "</h3></div></article>";
+          }).join("") + "</div></div></section>" : "") +
 
         '<section class="section milestones-section"><div class="wrap"><h2>Milestones</h2><ol class="milestones">' +
-        (C.milestones || []).map(function (m) { return '<li><span class="m-year">' + esc(m.year) + '</span><span class="m-dot" aria-hidden="true"></span><p>' + esc(m.text) + "</p></li>"; }).join("") +
-        "</ol></div></section>" +
+        (C.milestones || []).map(function (m) { return '<li><span class="m-year">' + esc(m.year) + '</span><span class="m-dot" aria-hidden="true"></span><p>' + esc(m.text) + "</p></li>"; }).join("") + "</ol></div></section>" +
 
-        (fac.length ? '<section class="section" id="the-club"><div class="wrap"><div class="section-top"><h2>The club</h2><a href="gallery.html">Gallery</a></div><div class="club-photos">' +
-          fac.map(function (f) { return '<figure><img src="' + safeUrl(f.photo) + '" alt="' + esc(f.caption) + '" loading="lazy"><figcaption>' + esc(f.caption) + "</figcaption></figure>"; }).join("") +
-          "</div></div></section>" : "") +
+        (ob.length ? '<section class="section" id="office-bearers"><div class="wrap"><h2>Office bearers through the years</h2><ol class="bearers-grid">' + ob.slice().reverse().map(function (r) {
+          return '<li><span class="b-year">' + esc(r.year) + '</span><dl><dt>President</dt><dd>' + esc(r.president) + "</dd><dt>Secretary</dt><dd>" + esc(r.secretary) + "</dd></dl></li>"; }).join("") + "</ol></div></section>" : "") +
 
         '<section class="section" id="activities"><div class="wrap"><h2>What we play</h2>' + activityList(C.activities, true) + "</div></section>" +
 
-        '<section class="section" id="founders"><div class="wrap"><h2>The founding team</h2><p class="section-lead">The ' +
-        (C.founders || []).length + " founder members of Central Club. Photographs from the year 2000.</p><div class=\"people founders\">" +
-        (C.founders || []).map(function (p) { return person(p, p.note, p.role); }).join("") + "</div></div></section>" +
-
-        (ob.length ? '<section class="section" id="office-bearers"><div class="wrap"><h2>Office bearers through the years</h2><p class="section-lead">Presidents and secretaries since ' + esc(ob[0].year) + ".</p>" +
-          '<ol class="bearers-grid">' + ob.slice().reverse().map(function (r) {
-            return '<li><span class="b-year">' + esc(r.year) + '</span><dl><dt>President</dt><dd>' + esc(r.president) + "</dd><dt>Secretary</dt><dd>" + esc(r.secretary) + "</dd></dl></li>";
-          }).join("") + "</ol></div></section>" : "") +
+        (fac.length ? '<section class="section" id="the-club"><div class="wrap"><div class="section-top"><h2>The club</h2><a href="gallery.html">Gallery</a></div><div class="club-photos">' +
+          fac.map(function (f) { return '<figure><img src="' + safeUrl(f.photo) + '" alt="' + esc(f.caption) + '" loading="lazy"><figcaption>' + esc(f.caption) + "</figcaption></figure>"; }).join("") + "</div></div></section>" : "") +
 
         ((C.faq || []).length ? '<section class="section" id="faq"><div class="wrap"><h2>Good to know</h2><div class="faq">' +
-          C.faq.map(function (f) { return "<details" + "><summary>" + esc(f.q) + "</summary><p>" + esc(f.a) + "</p></details>"; }).join("") + "</div></div></section>" : "") +
-        (cm.length ? '<section class="section" id="committee"><div class="wrap"><h2>Current committee</h2><div class="people">' +
-          cm.map(function (p) { return person(p, p.role); }).join("") + "</div></div></section>" : "");
+          C.faq.map(function (f) { return "<details><summary>" + esc(f.q) + "</summary><p>" + esc(f.a) + "</p></details>"; }).join("") + "</div></div></section>" : "");
     },
 
     members: function () {
