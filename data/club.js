@@ -20,7 +20,7 @@ window.CLUB = {
   town: "Changanacherry",
   founded: "1992",
   tagline: "Badminton, table tennis, carroms and good company, right here in Changanacherry.",
-  address: "Ruby Nagar, Changanacherry, Kerala [PIN]",
+  address: "Ruby Nagar, Changanacherry, Kerala 686103",
   phone: "+91 98470 58009",
   email: "info@centralclubchry.com",
   mapsUrl: "https://maps.google.com/?q=Central+Club+Changanacherry",
@@ -76,6 +76,14 @@ window.CLUB = {
     streamUrl: "https://www.youtube.com/",
     scoresUrl: ""   // optional: link to the live score app
   },
+
+  /* Questions shown at the end of the About page */
+  faq: [
+    { q: "Is Central Club the same as The Changanacherry Club?",
+      a: "No. Central Club Changanacherry is an independent sports club founded in 1992 by seventeen shuttle badminton players, with its own indoor courts at Ruby Nagar. It is not connected to The Changanacherry Club on Bypass Road. Our only website is centralclubchry.com." },
+    { q: "Where is Central Club?",
+      a: "Ruby Nagar, Changanacherry, Kerala 686103. Use the Google Maps link at the bottom of any page for directions." }
+  ],
 
   /* ---------- About & history ---------- */
   history: [
