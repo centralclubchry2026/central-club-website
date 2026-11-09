@@ -689,3 +689,20 @@ dialog.lightbox button { margin-top: .5rem; }
 .ab-fcard h3, .ab-ccard h3 { font-size: 1.55rem; overflow-wrap: anywhere; }
 .ab-hero h1 { font-size: clamp(2.8rem, 6.2vw, 5.4rem); }
 @media (max-width: 700px) { .ab-fcard h3, .ab-ccard h3 { font-size: 1.15rem; } }
+
+/* About: founders as round portraits with names below (overrides the photo-card style) */
+.ab-fgrid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 2.2rem 1.2rem; }
+.ab-fcard { height: auto; background: none; box-shadow: none; overflow: visible; text-align: center; border-radius: 0; }
+.ab-fcard img { width: 11.5rem; height: 11.5rem; margin: 0 auto; border-radius: 50%; object-fit: cover; object-position: center 22%; background: #fff;
+  border: 5px solid #fff; box-shadow: 0 0 0 3px #b8892b, 0 .6rem 1.4rem rgba(12,58,42,.18); }
+.ab-fcard > div { position: static; background: none; color: var(--ink); padding: 1rem .4rem 0; }
+.ab-fcard h3 { color: var(--court-deep); font-size: 1.45rem; line-height: 1.05; margin: .5rem 0 0; overflow-wrap: normal; }
+.ab-fcard p { color: var(--muted); font-size: .9rem; margin: .35rem 0 0; }
+@media (max-width: 1000px) { .ab-fgrid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 700px) {
+  .ab-fgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.8rem .8rem; }
+  .ab-fcard img { width: 8.5rem; height: 8.5rem; border-width: 4px; }
+  .ab-fcard h3 { font-size: 1.15rem; }
+  .ab-fcard p { font-size: .8rem; }
+  .ab-fcard > div { padding: .8rem .2rem 0; }
+}
