@@ -150,6 +150,27 @@ window.CLUB = {
     { year: "2011–12",   president: "Anil Mathew",           secretary: "Thomas Antony" }
   ],
 
+  /* Presidents & Secretaries gallery on the About page.
+     current: this year's office bearers (leave secretary "" until known).
+     photos: office bearer name exactly as written in officeBearers -> photo file.
+     founders: office bearers who are also founder members (shows a small "Founder" tag).
+     recentCount: how many past people to show before the "Earlier years" button. */
+  leaders: {
+    current: { year: "2026–27", president: "Rony", secretary: "" },
+    photos: {
+      "Rony": "images/people/rony.jpg",
+      "Anil Mathew": "images/people/anil-mathew.jpg",
+      "Siby Scaria": "images/people/siby-scaria.jpg",
+      "Babu Joseph": "images/people/babu-joseph.jpg",
+      "Satheesh Valiyaveedan": "images/people/satheesh-valiyaveedan.jpg",
+      "Renjith Mathews": "images/people/renjith-mathews.jpg",
+      "Gigi Francis": "images/people/gigi-francis.jpg",
+      "Gigi James": "images/people/gigi-james.jpg"
+    },
+    founders: ["Anil Mathew", "Siby Scaria", "Babu Joseph", "Satheesh Valiyaveedan", "Renjith Mathews", "Gigi Francis", "Gigi James", "Mathew Kurian"],
+    recentCount: 5
+  },
+
   /* From the archives: newspaper cuttings and old documents. */
   archive: [
     {

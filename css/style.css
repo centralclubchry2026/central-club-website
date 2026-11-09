@@ -706,3 +706,35 @@ dialog.lightbox button { margin-top: .5rem; }
   .ab-fcard p { font-size: .8rem; }
   .ab-fcard > div { padding: .8rem .2rem 0; }
 }
+
+/* About: Presidents & Secretaries gallery */
+.ldr-title { display: flex; align-items: center; gap: .9rem; font-size: 2rem; text-transform: uppercase; color: var(--court-deep); margin: 2.2rem 0 1.2rem; }
+.ldr-title::after { content: ""; flex: 1; height: 2px; background: var(--rule); }
+.ldr-row { display: grid; grid-template-columns: 1.35fr repeat(5, minmax(0, 1fr)); gap: 1.4rem 1.1rem; align-items: start; }
+.ldr-older { grid-template-columns: repeat(6, minmax(0, 1fr)); margin-top: 1.4rem; padding-top: 1.4rem; border-top: 1px dashed #c9d6ce; }
+.ldr { text-align: center; }
+.ldr-av { width: 7.4rem; height: 7.4rem; margin: 0 auto; border-radius: 50%; overflow: hidden; border: 4px solid #fff; box-shadow: 0 0 0 3px #b8892b, 0 .5rem 1.2rem rgba(12,58,42,.16); background: var(--court-deep); color: var(--flood); display: flex; align-items: center; justify-content: center; font-family: var(--display); font-weight: 800; font-size: 2.2rem; }
+.ldr-av img { width: 100%; height: 100%; object-fit: cover; object-position: center 22%; }
+.ldr b { display: block; font-family: var(--display); font-weight: 800; font-size: 1.3rem; line-height: 1.05; color: var(--court-deep); margin-top: .6rem; }
+.ldr-chips { display: flex; flex-wrap: wrap; justify-content: center; gap: .25rem; margin-top: .4rem; }
+.ldr-chips span { background: var(--court-deep); color: var(--flood); font-weight: 700; font-size: .7rem; padding: .18rem .45rem; border-radius: 99px; }
+.ldr-chips span.latest { background: var(--flood); color: var(--flood-ink); }
+.ldr-fd { display: inline-block; margin-top: .35rem; font-size: .62rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #b8892b; border: 1px solid #d8b45a; border-radius: 3px; padding: .05rem .3rem; }
+.ldr-cur { background: linear-gradient(180deg, var(--court-deep), #0f4a35); border-radius: 16px; padding: 1.3rem .8rem 1.2rem; box-shadow: 0 .9rem 1.9rem rgba(12,58,42,.25); }
+.ldr-cur .ldr-av { width: 10rem; height: 10rem; box-shadow: 0 0 0 4px var(--flood), 0 0 2.5rem rgba(244,196,48,.45); }
+.ldr-cur b { color: #fff; font-size: 1.75rem; }
+.ldr-cur small { display: block; color: #cfe0d6; font-size: .85rem; margin-top: .2rem; }
+.ldr-lbl { display: inline-block; background: var(--flood); color: var(--flood-ink); font-weight: 800; font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; padding: .25rem .6rem; border-radius: 99px; margin-bottom: .85rem; }
+.ldr-more { margin-top: 1.4rem; }
+.ldr-more summary { list-style: none; cursor: pointer; width: max-content; margin: 0 auto; font-weight: 700; color: var(--court-deep); border: 2px solid var(--court-deep); background: #fff; padding: .6rem 1.4rem; border-radius: 99px; }
+.ldr-more summary::-webkit-details-marker { display: none; }
+.ldr-more summary::after { content: " \25BE"; }
+.ldr-more[open] summary::after { content: " \25B4"; }
+.ldr-more summary:hover { background: var(--court-deep); color: #fff; }
+@media (max-width: 1000px) { .ldr-row, .ldr-older { grid-template-columns: repeat(3, minmax(0, 1fr)); } .ldr-cur { grid-column: span 3; max-width: 18rem; margin: 0 auto; } }
+@media (max-width: 600px) {
+  .ldr-row, .ldr-older { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.2rem .6rem; }
+  .ldr-cur { grid-column: span 2; }
+  .ldr-av { width: 6rem; height: 6rem; font-size: 1.8rem; }
+  .ldr b { font-size: 1.1rem; }
+}

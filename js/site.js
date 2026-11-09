@@ -243,6 +243,41 @@
       : '<img src="' + safeUrl(v.poster) + '" alt="Badminton at Central Club">') + "</div>";
   }
 
+  /* Presidents & Secretaries gallery: newest first, current office bearers spotlighted */
+  function leadersSection(ob) {
+    var L = C.leaders || {}, cur = L.current || {}, photos = L.photos || {}, fnd = L.founders || [], n = L.recentCount || 5;
+    if (!ob.length && !cur.president) return "";
+    function start(y) { var m = String(y).match(/\d{4}/); return m ? +m[0] : 0; }
+    function people(role) {
+      var map = {}, order = [];
+      ob.slice().sort(function (a, b) { return start(b.year) - start(a.year); }).forEach(function (r) {
+        var who = r[role]; if (!who) return;
+        if (!map[who]) { map[who] = []; order.push(who); }
+        map[who].push(r.year);
+      });
+      return order.map(function (w) { return { name: w, years: map[w] }; });
+    }
+    function face(name) {
+      return '<div class="ldr-av">' + (photos[name] ? '<img src="' + safeUrl(photos[name]) + '" alt="' + esc(name) + '" loading="lazy">' : '<span aria-hidden="true">' + initials(name) + "</span>") + "</div>";
+    }
+    function card(p) {
+      return '<div class="ldr">' + face(p.name) + "<b>" + esc(p.name) + '</b><div class="ldr-chips">' +
+        p.years.map(function (y, i) { return '<span' + (i === 0 ? ' class="latest"' : "") + ">" + esc(y) + "</span>"; }).join("") + "</div>" +
+        (fnd.indexOf(p.name) !== -1 ? '<span class="ldr-fd">Founder</span>' : "") + "</div>";
+    }
+    function block(title, role, curName) {
+      var list = people(role), recent = list.slice(0, n), older = list.slice(n);
+      var span = older.length ? older.reduce(function (a, p) { p.years.forEach(function (y) { a.push(start(y)); }); return a; }, []) : [];
+      var label = span.length ? "Earlier years (" + Math.min.apply(null, span) + "–" + (Math.max.apply(null, span) + 1) + ")" : "";
+      return '<h3 class="ldr-title">' + title + '</h3><div class="ldr-row">' +
+        (curName ? '<div class="ldr ldr-cur"><span class="ldr-lbl">Current · ' + esc(cur.year || "") + "</span>" + face(curName) + "<b>" + esc(curName) + "</b><small>" + (role === "president" ? "President" : "Secretary") + "</small></div>" : "") +
+        recent.map(card).join("") + "</div>" +
+        (older.length ? '<details class="ldr-more"><summary>' + esc(label) + '</summary><div class="ldr-row ldr-older">' + older.map(card).join("") + "</div></details>" : "");
+    }
+    return '<section class="section ldr-section" id="office-bearers"><div class="wrap"><h2 class="ab-h2">Presidents &amp; Secretaries</h2><p class="ab-sub">The people who have led Central Club, newest first.</p>' +
+      block("Presidents", "president", cur.president) + block("Secretaries", "secretary", cur.secretary) + "</div></section>";
+  }
+
   /* ---------- pages ---------- */
   var PAGES = {
     home: function () {
@@ -300,8 +335,7 @@
         '<section class="section milestones-section"><div class="wrap"><h2>Milestones</h2><ol class="milestones">' +
         (C.milestones || []).map(function (m) { return '<li><span class="m-year">' + esc(m.year) + '</span><span class="m-dot" aria-hidden="true"></span><p>' + esc(m.text) + "</p></li>"; }).join("") + "</ol></div></section>" +
 
-        (ob.length ? '<section class="section" id="office-bearers"><div class="wrap"><h2>Office bearers through the years</h2><ol class="bearers-grid">' + ob.slice().reverse().map(function (r) {
-          return '<li><span class="b-year">' + esc(r.year) + '</span><dl><dt>President</dt><dd>' + esc(r.president) + "</dd><dt>Secretary</dt><dd>" + esc(r.secretary) + "</dd></dl></li>"; }).join("") + "</ol></div></section>" : "") +
+        leadersSection(ob) +
 
         '<section class="section" id="activities"><div class="wrap"><h2>What we play</h2>' + activityList(C.activities, true) + "</div></section>" +
 
