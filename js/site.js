@@ -296,6 +296,8 @@
             return '<li><span class="b-year">' + esc(r.year) + '</span><dl><dt>President</dt><dd>' + esc(r.president) + "</dd><dt>Secretary</dt><dd>" + esc(r.secretary) + "</dd></dl></li>";
           }).join("") + "</ol></div></section>" : "") +
 
+        ((C.faq || []).length ? '<section class="section" id="faq"><div class="wrap"><h2>Good to know</h2><div class="faq">' +
+          C.faq.map(function (f) { return "<details" + "><summary>" + esc(f.q) + "</summary><p>" + esc(f.a) + "</p></details>"; }).join("") + "</div></div></section>" : "") +
         (cm.length ? '<section class="section" id="committee"><div class="wrap"><h2>Current committee</h2><div class="people">' +
           cm.map(function (p) { return person(p, p.role); }).join("") + "</div></div></section>" : "");
     },

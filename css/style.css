@@ -621,3 +621,10 @@ dialog.lightbox button { margin-top: .5rem; }
 @keyframes intro-draw { to { stroke-dashoffset: 0; } }
 @keyframes intro-fade { to { opacity: 1; } }
 @keyframes intro-crest { to { opacity: 1; transform: scale(1); } }
+
+/* About: FAQ */
+.faq { display: grid; gap: .6rem; max-width: 52rem; }
+.faq details { background: #fff; border: 1px solid var(--rule); border-left: 5px solid var(--court); border-radius: 6px; padding: .9rem 1.1rem; }
+.faq summary { cursor: pointer; font-weight: 700; font-size: 1.05rem; }
+.faq details[open] summary { margin-bottom: .5rem; }
+.faq p { margin: 0; }
