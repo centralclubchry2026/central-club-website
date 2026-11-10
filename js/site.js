@@ -348,29 +348,54 @@
 
     members: function () {
       var list = (C.members || []).slice();
-      main().innerHTML = pageHead("Our members", list.length + " members and counting") +
-        '<section class="section"><div class="wrap">' +
-        '<div class="toolbar"><label for="q">Find a member</label><input id="q" type="search" placeholder="Search by name or profession" autocomplete="off"></div>' +
-        '<div id="member-list"></div></div></section>';
+      function bare(n) { return String(n || "").replace(/^\s*(dr|adv)\.?\s*/i, "").trim(); }
+      function ini(n) {
+        var w = bare(n).replace(/[^A-Za-z ]/g, " ").split(/\s+/).filter(Boolean);
+        return esc(((w[0] || "")[0] || "") + ((w[1] || "")[0] || "")).toUpperCase() || "CC";
+      }
+      function letter(n) { var c = bare(n).charAt(0).toUpperCase(); return /[A-Z]/.test(c) ? c : "#"; }
+      list.sort(function (a, b) { return bare(a.name).localeCompare(bare(b.name)); });
 
+      main().innerHTML =
+        '<section class="mb-hero"><div class="wrap mb-hero-in"><div class="mb-hero-text">' + COURT +
+        '<p class="ab-kicker">Members</p><h1>The heart<span>of the club.</span></h1>' +
+        '<p class="mb-lead">Families, professionals and players who make Central Club what it is.</p></div>' +
+        '<div class="mb-logo"><img src="images/logo-full-on-dark.svg" alt="Central Club Changanacherry"></div></div></section>' +
+        '<section class="section mb-section"><div class="wrap"><h2 class="ab-h2">Our members</h2><p class="ab-sub">Search by name, or jump to a letter.</p>' +
+        '<div class="mb-tools"><div class="mb-search"><label for="q" class="sr-only">Search members</label>' +
+        '<input id="q" type="search" placeholder="Search members" autocomplete="off"><span id="mb-count" aria-live="polite"></span></div>' +
+        '<div class="mb-az" id="mb-az" aria-label="Jump to a letter"></div></div>' +
+        '<div id="member-list"></div>' +
+        '<div class="mb-join"><div><h3>Join Central Club</h3><p>Call ' + esc(C.phone || "") + " or email " + esc(C.email || "") + "</p></div>" +
+        '<a class="btn btn-flood" href="mailto:' + esc(C.email || "") + '?subject=Membership%20enquiry">Membership enquiry</a></div>' +
+        "</div></section>";
+
+      function card(m) {
+        return '<div class="mb-card"><div class="mb-av">' + (m.photo ? '<img src="' + safeUrl(m.photo) + '" alt="' + esc(m.name) + '" loading="lazy">' : '<span aria-hidden="true">' + ini(m.name) + "</span>") + "</div>" +
+          "<b>" + esc(m.name) + "</b>" + (m.house ? "<small>" + esc(m.house) + "</small>" : "") + (m.founder ? '<span class="ldr-fd">Founder</span>' : "") + "</div>";
+      }
       function render(q) {
         q = (q || "").toLowerCase().trim();
-        var shown = list.filter(function (m) {
-          return !q || (m.name + " " + m.profession).toLowerCase().indexOf(q) !== -1;
-        });
-        var years = {};
-        shown.forEach(function (m) { (years[m.joined] = years[m.joined] || []).push(m); });
-        var keys = Object.keys(years).sort(function (a, b) { return b - a; });
-        document.getElementById("member-list").innerHTML = keys.length
-          ? keys.map(function (y) {
-              var ms = years[y].sort(function (a, b) { return a.name.localeCompare(b.name); });
-              return '<div class="year-group"><h2>Joined ' + esc(y) + "<small>" + ms.length + (ms.length === 1 ? " member" : " members") + '</small></h2><div class="people">' +
-                ms.map(function (m) { return person(m, m.profession); }).join("") + "</div></div>";
-            }).join("")
-          : '<p class="empty">No members match "' + esc(q) + '". Try a different name or profession.</p>';
+        var shown = list.filter(function (m) { return !q || (m.name + " " + (m.house || "")).toLowerCase().indexOf(q) !== -1; });
+        var groups = {}, order = [];
+        shown.forEach(function (m) { var l = letter(m.name); if (!groups[l]) { groups[l] = []; order.push(l); } groups[l].push(m); });
+        document.getElementById("mb-count").textContent = shown.length + (shown.length === 1 ? " member" : " members");
+        document.getElementById("mb-az").innerHTML = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").map(function (l) {
+          return groups[l] ? '<button type="button" data-l="' + l + '">' + l + "</button>" : '<button type="button" disabled>' + l + "</button>";
+        }).join("");
+        document.getElementById("member-list").innerHTML = order.length ? order.map(function (l) {
+          return '<div class="mb-group" id="letter-' + l + '"><div class="mb-gh"><b>' + l + "</b><span></span><small>" + groups[l].length + '</small></div><div class="mb-grid">' +
+            groups[l].map(card).join("") + "</div></div>";
+        }).join("") : '<p class="empty">No members match "' + esc(q) + '". Try a different name.</p>';
       }
       render("");
       document.getElementById("q").addEventListener("input", function (e) { render(e.target.value); });
+      document.getElementById("mb-az").addEventListener("click", function (e) {
+        var l = e.target.getAttribute && e.target.getAttribute("data-l"); if (!l) return;
+        var g = document.getElementById("letter-" + l); if (!g) return;
+        var y = g.getBoundingClientRect().top + window.pageYOffset - (document.querySelector(".mb-tools").offsetHeight + 80);
+        window.scrollTo({ top: y, behavior: "smooth" });
+      });
     },
 
     coaching: function () {
