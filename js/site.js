@@ -372,7 +372,7 @@
 
       function card(m) {
         return '<div class="mb-card"><div class="mb-av">' + (m.photo ? '<img src="' + safeUrl(m.photo) + '" alt="' + esc(m.name) + '" loading="lazy">' : '<span aria-hidden="true">' + ini(m.name) + "</span>") + "</div>" +
-          "<b>" + esc(m.name) + "</b>" + (m.house ? "<small>" + esc(m.house) + "</small>" : "") + (m.founder ? '<span class="ldr-fd">Founder</span>' : "") + "</div>";
+          "<b>" + esc(m.name) + "</b>" + (m.house ? "<small>" + esc(m.house) + "</small>" : "") + (m.committee ? '<span class="mb-cm">' + esc(m.committee) + "</span>" : "") + (m.founder ? '<span class="ldr-fd">Founder</span>' : "") + "</div>";
       }
       function render(q) {
         q = (q || "").toLowerCase().trim();

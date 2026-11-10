@@ -789,3 +789,5 @@ dialog.lightbox button { margin-top: .5rem; }
 .ab-panel, .mb-hero-text { overflow: hidden; }
 .court-lines { overflow: hidden; }
 .mb-card b, .mb-card small, .ab-fcard h3, .ldr b { overflow-wrap: anywhere; }
+.mb-cm { display: inline-block; margin-top: .35rem; background: var(--flood); color: var(--flood-ink); font-size: .62rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; padding: .12rem .4rem; border-radius: 3px; }
+.mb-cm + .ldr-fd { margin-left: .25rem; }
