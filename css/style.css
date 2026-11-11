@@ -791,3 +791,7 @@ dialog.lightbox button { margin-top: .5rem; }
 .mb-card b, .mb-card small, .ab-fcard h3, .ldr b { overflow-wrap: anywhere; }
 .mb-cm { display: inline-block; margin-top: .35rem; background: var(--flood); color: var(--flood-ink); font-size: .62rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; padding: .12rem .4rem; border-radius: 3px; }
 .mb-cm + .ldr-fd { margin-left: .25rem; }
+/* New CC-in-flight mark is wider than tall */
+.brand img { width: auto; height: 2.6rem; }
+/* Intro: give the new logo a solid club-green backing so the court's net line doesn't show through it */
+.intro-crest { background: radial-gradient(closest-side, var(--court-deep) 78%, rgba(12,58,42,0) 100%); padding: 1.6rem 2.4rem; box-sizing: content-box; }
