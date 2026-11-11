@@ -156,9 +156,9 @@ window.CLUB = {
      founders: office bearers who are also founder members (shows a small "Founder" tag).
      recentCount: how many past people to show before the "Earlier years" button. */
   leaders: {
-    current: { year: "2026–27", president: "Rony", secretary: "" },
+    current: { year: "2026–27", president: "Rony Joseph", secretary: "" },
     photos: {
-      "Rony": "images/people/rony.jpg",
+      "Rony Joseph": "images/people/rony.jpg",
       "Anil Mathew": "images/people/anil-mathew.jpg",
       "Siby Scaria": "images/people/siby-scaria.jpg",
       "Babu Joseph": "images/people/babu-joseph.jpg",
@@ -196,19 +196,19 @@ window.CLUB = {
   ],
 
   committee: [
-    { name: "Rony",          role: "President",        photo: "images/people/rony.jpg" },
-    { name: "Biju",          role: "Vice President",   photo: "images/people/biju.jpg" },
+    { name: "Rony Joseph",   role: "President",        photo: "images/people/rony.jpg" },
+    { name: "Bijumon Pulimottil", role: "Vice President",   photo: "images/people/biju.jpg" },
     { name: "Shoji James",   role: "Joint Secretary",  photo: "images/people/shoji-james.jpg" },
     { name: "Martin Joseph", role: "Executive member", photo: "images/people/martin-joseph.jpg" },
-    { name: "Kishore",       role: "Executive member", photo: "images/people/kishore.jpg" }
+    { name: "Kishor Kumar",  role: "Executive member", photo: "images/people/kishore.jpg" }
   ],
 
   /* ---------- Members ----------
      One line per member: name and house name only (never phone numbers or full addresses).
      photo: add "images/people/<file>.jpg" when a photo arrives; leave "" to show initials.
-     founder: true shows a small "Founder" tag. Members are sorted A–Z automatically. */
+     founder: true shows a small "Founder" tag; committee: "<role>" shows a gold committee tag. Members are sorted A–Z automatically. */
   members: [
-    { name: "A. Bijumon Pulimootil", house: "", photo: "" },
+    { name: "Bijumon Pulimottil", house: "", photo: "images/people/biju.jpg", committee: "Vice President" },
     { name: "A. Venugopalan", house: "Aiswarya", photo: "" },
     { name: "A.M Joseph Anjiliparampil", house: "", photo: "" },
     { name: "Adv. Zakeer Huslan", house: "Puthenparampil", photo: "" },
@@ -251,7 +251,7 @@ window.CLUB = {
     { name: "Gijan Thomas", house: "Koippally", photo: "images/people/gigen-thomas.jpg", founder: true },
     { name: "Ginson Thomas", house: "Chennithala", photo: "" },
     { name: "Gokul Das", house: "Mohini Nivas", photo: "" },
-    { name: "H Kishore", house: "Sunitha Bhavan", photo: "" },
+    { name: "Kishor Kumar", house: "Sunitha Bhavan", photo: "images/people/kishore.jpg", committee: "Executive member" },
     { name: "Hari Krishnan", house: "", photo: "" },
     { name: "Jacob Thomas", house: "Thattazham", photo: "" },
     { name: "James Chacko", house: "Kalapurackal", photo: "" },
@@ -296,7 +296,7 @@ window.CLUB = {
     { name: "Manoj A M", house: "Acklathu Putheanparampil", photo: "" },
     { name: "Manoj Philip", house: "Thoppil", photo: "" },
     { name: "Martin Chacko Joseph", house: "Thottacherry", photo: "" },
-    { name: "Martin Joseph", house: "Parakadavil", photo: "images/people/martin-joseph.jpg" },
+    { name: "Martin Joseph", house: "Parakadavil", photo: "images/people/martin-joseph.jpg", committee: "Executive member" },
     { name: "Martin K C", house: "Karimattom", photo: "" },
     { name: "Martin Thomas", house: "Perumpuzhakadavil", photo: "" },
     { name: "Martin Varghese", house: "", photo: "" },
@@ -318,7 +318,7 @@ window.CLUB = {
     { name: "Regi Micheal", house: "Kavalam", photo: "" },
     { name: "Renjith Mathews", house: "Karingada", photo: "images/people/renjith-mathews.jpg", founder: true },
     { name: "Robin Thomas", house: "", photo: "" },
-    { name: "Roni Joseph", house: "Koottummel", photo: "" },
+    { name: "Rony Joseph", house: "Koottummel", photo: "images/people/rony.jpg", committee: "President" },
     { name: "Roy Jose", house: "Pullukattu", photo: "" },
     { name: "Ruban Thomas", house: "Chingamparambil", photo: "" },
     { name: "Sabu Thomas", house: "Kurisummoottil", photo: "" },
@@ -335,7 +335,7 @@ window.CLUB = {
     { name: "Shaji Philip", house: "Thoppil", photo: "" },
     { name: "Shibu Mathew", house: "Palathra", photo: "" },
     { name: "Shiv Kumar", house: "", photo: "" },
-    { name: "Shoji James", house: "Koduppunna Polockal", photo: "images/people/shoji-james.jpg" },
+    { name: "Shoji James", house: "Koduppunna Polockal", photo: "images/people/shoji-james.jpg", committee: "Joint Secretary" },
     { name: "Sibi Antony", house: "Njaliyil", photo: "" },
     { name: "Sibi Scaria", house: "Krishna Nivas", photo: "" },
     { name: "Sibichen VV", house: "Chakandu Puthen Pura", photo: "" },
