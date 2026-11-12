@@ -64,13 +64,13 @@
 
   /* ---------- header & footer ---------- */
   var NAV = [
-    ["home", "index.html", "Home"],
-    ["about", "about.html", "About"],
-    ["members", "members.html", "Members"],
-    ["coaching", "coaching.html", "Coaching"],
-    ["activities", "activities.html", "Activities"],
-    ["news", "news.html", "News & results"],
-    ["gallery", "gallery.html", "Gallery"]
+    ["home", "/", "Home"],
+    ["about", "/about", "About"],
+    ["members", "/members", "Members"],
+    ["coaching", "/coaching", "Coaching"],
+    ["activities", "/activities", "Activities"],
+    ["news", "/news", "News & results"],
+    ["gallery", "/gallery", "Gallery"]
   ];
 
   function socialLinks() {
@@ -88,7 +88,7 @@
         (C.live.scoresUrl ? "<a" + ext(C.live.scoresUrl) + ">Live scores</a>" : "") + "</div></div>"
       : "";
     var links = NAV.map(function (n) {
-      return '<li><a href="/' + n[1] + '"' + (n[0] === page ? ' aria-current="page"' : "") + ">" + n[2] + "</a></li>";
+      return '<li><a href="' + n[1] + '"' + (n[0] === page ? ' aria-current="page"' : "") + ">" + n[2] + "</a></li>";
     }).join("");
     var h = document.createElement("div");
     h.innerHTML =
@@ -288,18 +288,18 @@
         "<h1>" + esc(C.name) + '<span class="town">' + esc(C.town) + "</span></h1>" +
         "<p>" + esc(C.tagline) + "</p>" +
         '<p class="since">Est. ' + esc(C.founded) + "</p>" +
-        '<div class="actions"><a class="btn btn-flood" href="coaching.html">Join badminton coaching</a>' +
-        '<a class="btn btn-line" href="news.html#results">Latest results</a></div></div>' + ((C.heroSlides || []).length || C.heroImage ? "" : heroMedia()) + "</div></section>" +
+        '<div class="actions"><a class="btn btn-flood" href="/coaching">Join badminton coaching</a>' +
+        '<a class="btn btn-line" href="/news#results">Latest results</a></div></div>' + ((C.heroSlides || []).length || C.heroImage ? "" : heroMedia()) + "</div></section>" +
 
         '<section class="section home-main"><div class="wrap home-grid">' +
-        '<div class="home-results"><div class="section-top"><h2>Latest results</h2><a href="news.html#results">All results</a></div>' +
+        '<div class="home-results"><div class="section-top"><h2>Latest results</h2><a href="/news#results">All results</a></div>' +
         (ts.length ? ts.slice(0, 2).map(function (t) { return tournamentBlock(t, true); }).join("") : '<p class="empty">Results will appear here after each tournament.</p>') + "</div>" +
         '<aside class="home-side" aria-label="Club updates and events">' +
-        '<div class="side-card"><div class="section-top"><h2>Club updates</h2><a href="news.html">All news</a></div>' + newsList((C.news || []).slice(0, 3)) + "</div>" +
+        '<div class="side-card"><div class="section-top"><h2>Club updates</h2><a href="/news">All news</a></div>' + newsList((C.news || []).slice(0, 3)) + "</div>" +
         '<div class="side-card"><h2>Coming up</h2>' + eventsList(C.events) + "</div>" +
         '<div class="side-card side-coaching"><p class="side-kicker">' + esc(co.admissions || "") + "</p><h2>" + esc(co.headline || "Coaching") + "</h2><p>" + esc(co.homeIntro || co.intro) + "</p>" +
         ((co.forWhom || []).length ? '<ul class="chips">' + co.forWhom.map(function (f) { return "<li>" + esc(f) + "</li>"; }).join("") + "</ul>" : "") +
-        '<a class="btn btn-flood" href="coaching.html">Coaching, batches & timings</a></div>' +
+        '<a class="btn btn-flood" href="/coaching">Coaching, batches & timings</a></div>' +
         "</aside></div></section>";
     },
 
@@ -339,7 +339,7 @@
 
         '<section class="section" id="activities"><div class="wrap"><h2>What we play</h2>' + activityList(C.activities, true) + "</div></section>" +
 
-        (fac.length ? '<section class="section" id="the-club"><div class="wrap"><div class="section-top"><h2>The club</h2><a href="gallery.html">Gallery</a></div><div class="club-photos">' +
+        (fac.length ? '<section class="section" id="the-club"><div class="wrap"><div class="section-top"><h2>The club</h2><a href="/gallery">Gallery</a></div><div class="club-photos">' +
           fac.map(function (f) { return '<figure><img src="' + safeUrl(f.photo) + '" alt="' + esc(f.caption) + '" loading="lazy"><figcaption>' + esc(f.caption) + "</figcaption></figure>"; }).join("") + "</div></div></section>" : "") +
 
         ((C.faq || []).length ? '<section class="section" id="faq"><div class="wrap"><h2>Good to know</h2><div class="faq">' +
