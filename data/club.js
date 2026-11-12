@@ -504,7 +504,7 @@ window.CLUB = {
         { name: "Helen Susan Jenu",     result: "Runner-up", event: "Under 17 Girls",             group: "Girls", photo: "images/tournaments/youth-2026/u17-girls-runner-up.jpg" }
       ],
       note: "Double champion: Ahana Krishna won both the Under 13 and Under 17 girls' titles.",
-      testimonialsLink: "coaching.html#testimonials",
+      testimonialsLink: "/coaching#testimonials",
       groupPhoto: "images/tournaments/youth-2026/prize-distribution.jpg",
       groupCaption: "Winners and runners-up with club members and coaches at the prize distribution."
     }
