@@ -337,11 +337,6 @@
 
         leadersSection(ob) +
 
-        '<section class="section" id="activities"><div class="wrap"><h2>What we play</h2>' + activityList(C.activities, true) + "</div></section>" +
-
-        (fac.length ? '<section class="section" id="the-club"><div class="wrap"><div class="section-top"><h2>The club</h2><a href="/gallery">Gallery</a></div><div class="club-photos">' +
-          fac.map(function (f) { return '<figure><img src="' + safeUrl(f.photo) + '" alt="' + esc(f.caption) + '" loading="lazy"><figcaption>' + esc(f.caption) + "</figcaption></figure>"; }).join("") + "</div></div></section>" : "") +
-
         ((C.faq || []).length ? '<section class="section" id="faq"><div class="wrap"><h2>Good to know</h2><div class="faq">' +
           C.faq.map(function (f) { return "<details><summary>" + esc(f.q) + "</summary><p>" + esc(f.a) + "</p></details>"; }).join("") + "</div></div></section>" : "");
     },

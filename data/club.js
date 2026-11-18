@@ -156,9 +156,10 @@ window.CLUB = {
      founders: office bearers who are also founder members (shows a small "Founder" tag).
      recentCount: how many past people to show before the "Earlier years" button. */
   leaders: {
-    current: { year: "2026–27", president: "Rony Joseph", secretary: "" },
+    current: { year: "2026–27", president: "Rony Joseph", secretary: "Shibu Mathew Palathra" },
     photos: {
       "Rony Joseph": "images/people/rony.jpg",
+      "Shibu Mathew Palathra": "images/people/shibu-mathew.jpg",
       "Anil Mathew": "images/people/anil-mathew.jpg",
       "Siby Scaria": "images/people/siby-scaria.jpg",
       "Babu Joseph": "images/people/babu-joseph.jpg",
@@ -198,6 +199,7 @@ window.CLUB = {
   committee: [
     { name: "Rony Joseph",   role: "President",        photo: "images/people/rony.jpg" },
     { name: "Bijumon Pulimottil", role: "Vice President",   photo: "images/people/biju.jpg" },
+    { name: "Shibu Mathew Palathra", role: "Secretary", photo: "images/people/shibu-mathew.jpg" },
     { name: "Shoji James",   role: "Joint Secretary",  photo: "images/people/shoji-james.jpg" },
     { name: "Martin Joseph", role: "Executive member", photo: "images/people/martin-joseph.jpg" },
     { name: "Kishor Kumar",  role: "Executive member", photo: "images/people/kishore.jpg" }
@@ -333,7 +335,7 @@ window.CLUB = {
     { name: "Sebastian T K", house: "Thoompumkal", photo: "" },
     { name: "Shajan Jacob", house: "Ovelil", photo: "" },
     { name: "Shaji Philip", house: "Thoppil", photo: "" },
-    { name: "Shibu Mathew", house: "Palathra", photo: "" },
+    { name: "Shibu Mathew", house: "Palathra", photo: "images/people/shibu-mathew.jpg", committee: "Secretary" },
     { name: "Shiv Kumar", house: "", photo: "" },
     { name: "Shoji James", house: "Koduppunna Polockal", photo: "images/people/shoji-james.jpg", committee: "Joint Secretary" },
     { name: "Sibi Antony", house: "Njaliyil", photo: "" },
